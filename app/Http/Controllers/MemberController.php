@@ -51,7 +51,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        return view('member.member-edit', [
+        return view('member.member-detail', [
             'title' => 'Member',
             'active' => 'member'
         ]);
@@ -65,7 +65,10 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('member.member-edit', [
+            'title' => 'Member',
+            'active' => 'member'
+        ]);
     }
 
     /**

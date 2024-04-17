@@ -51,7 +51,7 @@ class AdministatorController extends Controller
      */
     public function show($id)
     {
-        return view('admin.admin-edit', [
+        return view('admin.admin-detail', [
             'title' => 'Administator',
             'active' => 'administator'
         ]);
@@ -65,7 +65,10 @@ class AdministatorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.admin-edit', [
+            'title' => 'Administator',
+            'active' => 'administator'
+        ]);
     }
 
     /**
