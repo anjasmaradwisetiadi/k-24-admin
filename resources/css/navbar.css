@@ -1,0 +1,35 @@
+.text-font{
+    text-align: center;
+}
+.non-padding{
+    padding: 0px !important;
+}
+.navbar-color{
+    background-color: #03182C !important;
+    color: white !important;
+}
+.navbar-list a{
+    font-size: 18px;
+    font-weight: 600;
+}
+.text-active{
+    text-decoration: underline;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.logo-master-duel-ruler{
+    width: 182px;
+}
+.style-person-icon{
+    background-color: #63625c;
+    border-radius: 50%;
+    border: 2px solid #385979;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+}
+.account-login{
+    border-bottom: 1px solid black;
+}
