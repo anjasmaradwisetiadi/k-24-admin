@@ -8,6 +8,7 @@ body{
     font-family: Roboto, sans-serif !important;
     background-color: #0B365E !important;
     color: white !important;
+    min-height: ;
 }
 
 .button-style-primary{
@@ -42,4 +43,12 @@ button:disabled,
 button[disabled]{
   background-color: #63625c;
   border: 2px solid #9c9494;
+}
+
+#Error-404 .page-not-found{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    display: flex;
 }

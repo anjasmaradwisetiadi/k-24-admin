@@ -5,6 +5,18 @@
 
 @section('container')
 <div id="Category-Crud-Create">
-    <h2>testing </h2>
+    <div class="row">
+        <div class="col d-flex justify-content-center page-not-found">
+            <div>
+                <h2 class="mb-2">Dashboard</h2>
+                <p class="mt-5">
+                    Welcome , <b>{Username}</b> 
+                </p>
+                <p>
+                    You login as <b>{position}</b> 
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

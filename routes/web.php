@@ -21,7 +21,17 @@ use App\Http\Controllers\AdministatorController;
 // });
 
 Route::get('/', function () {
-    return view('home.home');
+    return view('home.home',[
+        'title' => 'Home',
+        'active' => 'home'
+    ]);
+});
+
+Route::get('/home', function () {
+    return view('home.home',[
+        'title' => 'Home',
+        'active' => 'home'
+    ]);
 });
 
 Route::get('/login', [AuthController::class, 'login']);
