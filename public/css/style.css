@@ -127,16 +127,6 @@ table tr td:nth-child(6) {
     overflow: hidden;
 }
 
-.image-engines{
-    width: 40px;
-    height: 40px;
-}
-
-.image-rarity{
-    width: 22px;
-    height: 22px;
-}
-
 .action-pointer .material-button{
     padding: 7px;
     width: 38px !important;
