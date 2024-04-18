@@ -13,18 +13,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(){
-        return view('auth.register', [
-            'title' => 'Register',
-            'active' => 'register'
-        ]);
-    }
-
     public function loginAuthentication(){
-        
-    }
-
-    public function resgisterAuthentication(){
         
     }
 

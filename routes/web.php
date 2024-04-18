@@ -36,8 +36,6 @@ Route::get('/home', function () {
 
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'loginAuthentication']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::post('/register', [AuthController::class, 'resgisterAuthentication']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::resource('/administator', AdministatorController::class);
