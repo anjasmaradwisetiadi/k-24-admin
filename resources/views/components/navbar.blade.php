@@ -19,7 +19,7 @@
             <a class="nav-link text-white align-self-center ml-2"> 
               <form action="/logout" method="post">
                   @csrf
-                  <button type="submit" class="btn btn-danger">Logout</button>
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('Are you Sure want Logout it?')">Logout</button>
               </form>
             </a>
             @endauth

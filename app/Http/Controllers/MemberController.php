@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -13,9 +14,12 @@ class MemberController extends Controller
      */
     public function index()
     {
+        $users = User::where('position','=','member')
+            ->where('status','=',true)->latest()->paginate(10)->withQueryString();
         return view('member.member', [
             'title' => 'Member',
-            'active' => 'member'
+            'active' => 'member',
+            'users'=>$users
         ]);
     }
 
@@ -50,10 +54,13 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $user = User::where('id','=',$id)->firstOrFail();
+
         return view('member.member-detail', [
             'title' => 'Member',
-            'active' => 'member'
+            'active' => 'member',
+            'user'=> $user
         ]);
     }
 

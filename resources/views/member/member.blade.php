@@ -18,7 +18,7 @@
 
     <div class="row mb-2">
         <div class="col">
-            <button type="button" class="button-style-primary"><a href="/member/create" class="add-new-counter-link" >Add Member</a></button>
+            <a href="/member/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add Member </button> </a>
         </div>
     </div>
     <div class="row">
@@ -35,48 +35,62 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($users as $user)
                     <tr scope="row">
                         <td> 
-                            <div class="elipsis"> 1. </div>
+                            <div class="elipsis"> 
+                                    {{(10 * ($users->currentPage() - 1)) + $loop->iteration}}.
+                            </div>
                         </td>
                         <td> 
-                            <div class="elipsis"> Anjasmara </div>
+                            <div class="elipsis"> {{$user->name}}</div>
                         </td>
                         <td>
                             <div class="elipsis">
-                                anjamara@gmail.com
+                                {{$user->email}}
                             </div>
                         </td>
                         <td>
                             <div class="elipsis">
-                                Male
+                                {{$user->gender}}
                             </div>
                         </td>
                         <td>
                             <div class="elipsis" >
-                                Administator
+                                {{$user->position}}
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex action-pointer">
-                                <a href="/member/2" class="add-new-counter-link">
-                                    <span class="material-icons material-button mr-2 pointer">
-                                        visibility
-                                    </span>
+                            <div class="d-flex action-pointer justify-content-center">
+                                <a href="/member/{{$user->id}}" class="add-new-counter-link mr-2">
+                                    <button class="button-style-primary">
+                                        <span class="material-icons pointer">
+                                            visibility
+                                        </span>
+                                    </button>
                                 </a>
-                                <a href="/member/edit/2" class="add-new-counter-link">
-                                    <span class="material-icons material-button mr-2 pointer">
-                                        edit
-                                    </span>
+                                <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
+                                    <button class="button-style-primary">
+                                        <span class="material-icons pointer">
+                                            edit
+                                        </span>
+                                    </button>
                                 </a>
-                                <a href="/member" class="add-new-counter-link">
-                                    <span class="material-icons material-button pointer">
-                                        delete
-                                    </span>
+                                <a class="add-new-counter-link">
+                                    <form action="/member/{{$user->id}}" method="post" style="display: inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure wand delete it?')"> 
+                                            <span class="material-icons pointer">
+                                                delete
+                                            </span>
+                                        </button>
+                                      </form>
                                 </a>
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                     {{-- <tr v-if="!dataDeckBuilders?.data?.length">
                         <td colspan="5">
                             <div class="d-flex justify-content-center">
@@ -88,11 +102,8 @@
                 <tfoot>
                     <th colspan="6">
                         <div class="row" v-if="dataDeckBuilders?.data?.length">
-                            <div class="col d-flex justify-content-start align-items-center">
-                                <div class="mr-4">
-                                    <button class="button-style-primary mr-2"> < </button>
-                                    <button class="button-style-primary" > > </button>
-                                </div>
+                            <div class="col">
+                                {{ $users->links() }}
                             </div>
                         </div>
                     </th>

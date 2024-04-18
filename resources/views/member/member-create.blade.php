@@ -12,7 +12,9 @@
     </div>
     <div class="row mb-2">
         <div class="col d-flex justify-content-end">
-            <button type="button" class="button-style-secondary">Back</button>
+            <a href="/member" class="add-new-counter-link">
+                <button type="button" class="button-style-secondary">Kembali</button>
+            </a>
         </div>
     </div>
     <div class="form-create">

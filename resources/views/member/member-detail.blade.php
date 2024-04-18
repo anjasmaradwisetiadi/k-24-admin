@@ -14,11 +14,17 @@
         <div class="col-9">
             <div class="row mb-2">
                 <div class="col">
-                    <button type="button" class="button-style-primary mr-2">Edit Member</button>
-                    <button type="button" class="button-style-primary">Delete Member</button>
+                    <a href="/member/{{$user->id}}/edit" class="add-new-counter-link">
+                        <button type="button" class="button-style-primary mr-2">Edit Member</button>
+                    </a>
+                    <a href="" class="add-new-counter-link">
+                        <button type="button" class="button-style-primary">Delete Member</button>
+                    </a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <button type="button" class="button-style-secondary">Kembali</button>
+                    <a href="/member" class="add-new-counter-link">
+                        <button type="button" class="button-style-secondary">Kembali</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -28,7 +34,7 @@
             <div class="card-trap-spell-preview wrap-card-currently">
                 <div class="d-flex">
                     <div class="image-section">
-                        <img class="main-image" src="https://images.ygoprodeck.com/images/cards_cropped/72270339.jpg" alt="khastira" >
+                        <img class="main-image" src="{{$user->photo}}" alt="{{$user->name}}" >
                     </div>
                     <div class="information-section">
                         <div class="row mb-1">
@@ -36,7 +42,7 @@
                                 Name :
                             </div>
                             <div class="col-9">
-                                 Anjasmara Dwi Setiadi
+                                 {{$user->name}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -44,7 +50,7 @@
                                 No KTP :
                             </div>
                             <div class="col-9">
-                                 38173518534131334
+                                {{$user->no_ktp}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -52,7 +58,7 @@
                                 Email :
                             </div>
                             <div class="col-9">
-                                 anjasmara@gmail.com
+                                {{$user->email}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -60,7 +66,7 @@
                                 No Handphone :
                             </div>
                             <div class="col-9">
-                                 013781631313131
+                                {{$user->no_hp}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -68,7 +74,7 @@
                                 Date Birth :
                             </div>
                             <div class="col-9">
-                                 12-09-1997
+                                {{$user->date_birth}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -76,7 +82,7 @@
                                 Gender :
                             </div>
                             <div class="col-9">
-                                 Male
+                                {{$user->gender}}
                             </div>
                         </div>
                         <div class="row mb-1">
@@ -84,7 +90,7 @@
                                 Posiiton :
                             </div>
                             <div class="col-9">
-                                 Administator
+                                {{$user->position}}
                             </div>
                         </div>
                     </div>

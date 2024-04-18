@@ -1,3 +1,12 @@
+.add-new-counter-link{
+    text-decoration: none !important;
+    color: white;
+}
+.add-new-counter-link:hover{
+    text-decoration: none !important;
+    color: white;
+}
+
 .wrap-card-currently {
     border: 3px solid #385979;
     background-color: #0D2F4E;
@@ -14,3 +23,4 @@
     min-height: 290px;
     min-width: 100%;
 }
+
