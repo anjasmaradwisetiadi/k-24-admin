@@ -18,10 +18,11 @@
                         <button type="button" class="button-style-primary mr-2">Edit Administator</button>
                     </a>
                     <a href="" class="add-new-counter-link">
-                        <form action="/administator/{{$user->id}}" method="post" style="display: inline">
+                        <form action="/administator/{{$user->id}}" method="post" style="display: inline" >
                             @method('delete')
                             @csrf
-                            <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')"> 
+                            <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')" 
+                                {{auth()->user()->email === $user->email ? 'disabled' : '' }}> 
                                 Delete Administator
                             </button>
                         </form>

@@ -30,7 +30,7 @@
                         <th scope="col" >Name</th>
                         <th scope="col" >Email</th>
                         <th scope="col" >Gender</th>
-                        <th scope="col" >Posiiton</th>
+                        <th scope="col" >Positon</th>
                         <th scope="col" >Action</th>
                     </tr>
                 </thead>
@@ -52,12 +52,12 @@
                             </div>
                         </td>
                         <td>
-                            <div class="elipsis">
+                            <div class="elipsis d-flex action-pointer justify-content-center">
                                 {{$user->gender}}
                             </div>
                         </td>
                         <td>
-                            <div class="elipsis" >
+                            <div class="elipsis d-flex action-pointer justify-content-center" >
                                 {{$user->position}}
                             </div>
                         </td>
@@ -65,14 +65,14 @@
                             <div class="d-flex action-pointer justify-content-center">
                                 <a href="/member/{{$user->id}}" class="add-new-counter-link mr-2">
                                     <button class="button-style-primary">
-                                        <span class="material-icons pointer">
+                                        <span class="material-icons">
                                             visibility
                                         </span>
                                     </button>
                                 </a>
                                 <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
                                     <button class="button-style-primary">
-                                        <span class="material-icons pointer">
+                                        <span class="material-icons">
                                             edit
                                         </span>
                                     </button>
@@ -81,8 +81,9 @@
                                     <form action="/member/{{$user->id}}" method="post" style="display: inline">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')"> 
-                                            <span class="material-icons pointer">
+                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')" 
+                                            {{auth()->user()->email === $user->email ? 'disabled' : '' }}> 
+                                            <span class="material-icons">
                                                 delete
                                             </span>
                                         </button>

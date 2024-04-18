@@ -21,7 +21,8 @@
                         <form action="/member/{{$user->id}}" method="post" style="display: inline">
                             @method('delete')
                             @csrf
-                            <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')"> 
+                            <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')" 
+                                {{auth()->user()->email === $user->email ? 'disabled' : '' }}> 
                                 Delete Member
                             </button>
                         </form>
