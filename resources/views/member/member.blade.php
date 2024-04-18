@@ -35,6 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(isset($users))
                     @foreach ($users as $user)
                     <tr scope="row">
                         <td> 
@@ -80,25 +81,29 @@
                                     <form action="/member/{{$user->id}}" method="post" style="display: inline">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure wand delete it?')"> 
+                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')"> 
                                             <span class="material-icons pointer">
                                                 delete
                                             </span>
                                         </button>
-                                      </form>
+                                    </form>
                                 </a>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-                    {{-- <tr v-if="!dataDeckBuilders?.data?.length">
-                        <td colspan="5">
+                    @endif
+                    @if(!isset($users))
+                    <tr>
+                        <td colspan="6">
                             <div class="d-flex justify-content-center">
-                                Tidak ada data yang terecord
+                                Data not record
                             </div>
                         </td>
-                    </tr> --}}
+                    </tr>
+                    @endif
                 </tbody>
+                @if(isset($users))
                 <tfoot>
                     <th colspan="6">
                         <div class="row" v-if="dataDeckBuilders?.data?.length">
@@ -108,6 +113,7 @@
                         </div>
                     </th>
                 </tfoot>
+                @endif
             </table>
         </div>
     </div>

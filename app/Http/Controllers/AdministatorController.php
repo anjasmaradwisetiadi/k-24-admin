@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdministatorController extends Controller
@@ -13,9 +14,12 @@ class AdministatorController extends Controller
      */
     public function index()
     {
+        $users = User::where('position','=','administator')->latest()->paginate(10)->withQueryString();
+
         return view('admin.admin', [
             'title' => 'Administator',
-            'active' => 'administator'
+            'active' => 'administator',
+            'users'=> $users,
         ]);
     }
 
@@ -51,9 +55,11 @@ class AdministatorController extends Controller
      */
     public function show($id)
     {
+        $user = User::where('id','=',$id)->firstOrFail();
         return view('admin.admin-detail', [
             'title' => 'Administator',
-            'active' => 'administator'
+            'active' => 'administator',
+            'user'=> $user
         ]);
     }
 

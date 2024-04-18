@@ -17,8 +17,14 @@
                     <a href="/member/{{$user->id}}/edit" class="add-new-counter-link">
                         <button type="button" class="button-style-primary mr-2">Edit Member</button>
                     </a>
-                    <a href="" class="add-new-counter-link">
-                        <button type="button" class="button-style-primary">Delete Member</button>
+                    <a class="add-new-counter-link">
+                        <form action="/member/{{$user->id}}" method="post" style="display: inline">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')"> 
+                                Delete Member
+                            </button>
+                        </form>
                     </a>
                 </div>
                 <div class="col d-flex justify-content-end">

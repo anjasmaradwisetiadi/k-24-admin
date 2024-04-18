@@ -1,0 +1,26 @@
+.add-new-counter-link{
+    text-decoration: none !important;
+    color: white;
+}
+.add-new-counter-link:hover{
+    text-decoration: none !important;
+    color: white;
+}
+
+.wrap-card-currently {
+    border: 3px solid #385979;
+    background-color: #0D2F4E;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+.image-section .main-image{
+    width: 210px;
+    margin-right: 0.75rem;
+}
+
+.information-section {
+    min-height: 290px;
+    min-width: 100%;
+}
+
