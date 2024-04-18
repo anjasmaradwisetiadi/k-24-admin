@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdministatorsTable extends Migration
+class CreateAdminMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAdministatorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('administators', function (Blueprint $table) {
+        Schema::create('admin_members', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->string('email')->unique();
@@ -24,6 +24,7 @@ class CreateAdministatorsTable extends Migration
             $table->string('no_ktp');
             $table->string('photo');
             $table->enum('position', ['administator','member']);
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateAdministatorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('administators');
+        Schema::dropIfExists('admin_members');
     }
 }

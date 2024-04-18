@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-use App\Models\Member;
+use App\Models\AdminMember;
 use Illuminate\Support\Str;
-use App\Models\Administator;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //********* */ create user role Administator
-        Administator::create([
+        AdminMember::create([
             'id'=> Str::uuid(),
             'name' => 'Anjasmara Dwi Setiadi',
             'email'=> 'anjasmara@gmail.com',
@@ -29,10 +28,11 @@ class DatabaseSeeder extends Seeder
             'gender'=>'male',
             'no_ktp'=>'0863175418163',
             'photo'=>'https://images.ygoprodeck.com/images/cards_small/99726621.jpg',
-            'position'=>'administator'
+            'position'=>'administator',
+            'status'=> true,
         ]);
 
-        Administator::create([
+        AdminMember::create([
             'id'=> Str::uuid(),
             'name' => 'Ihdi Ulfaq',
             'email'=> 'ihdiulfaq@gmail.com',
@@ -42,13 +42,11 @@ class DatabaseSeeder extends Seeder
             'gender'=>'male',
             'no_ktp'=>'0863175318363',
             'photo'=>'https://images.ygoprodeck.com/images/cards_small/99726621.jpg',
-            'position'=>'administator'
+            'position'=>'administator',
+            'status'=> false,
         ]);
-        Administator::factory(50)->create();
-
-        
         //********* */ create user role Member
-        Member::create([
+        AdminMember::create([
             'id'=> Str::uuid(),
             'name' => 'Mylalovic Frederich',
             'email'=> 'mylalovic@gmail.com',
@@ -62,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'status'=> true,
         ]);
 
-        Member::create([
+        AdminMember::create([
             'id'=> Str::uuid(),
             'name' => 'Santiago Lozano',
             'email'=> 'santiagolozano@gmail.com',
@@ -75,7 +73,6 @@ class DatabaseSeeder extends Seeder
             'position'=>'member',
             'status'=> false,
         ]);
-
-        Member::factory(50)->create();
+        AdminMember::factory(50)->create();
     }
 }
