@@ -19,10 +19,10 @@
         <div class="col d-flex justify-content-center page-not-found">
             <div>
                 <p class="mt-5">
-                    Welcome , <b>{Username}</b> 
+                    Welcome , <b>{{auth()->user()->name}}</b> 
                 </p>
                 <p>
-                    You login as <b>{position}</b> 
+                    You login as <b>{{auth()->user()->position}}</b> 
                 </p>
             </div>
         </div>

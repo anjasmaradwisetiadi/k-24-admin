@@ -15,38 +15,14 @@
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'home' || $active === '' ? 'active text-active': '' : ''}}"  href="/home">Home </a>
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'administator' ? 'active text-active': '' : ''}}"  href="/administator">Administator </a>
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'member' ? 'active text-active': '': ''}}"  href="/member">Member</a>
-            <a class="nav-link text-white align-self-center ml-2" href="/login"> 
-              <button type="button" class="btn btn-primary">Login</button>
-            </a>
+            @auth
             <a class="nav-link text-white align-self-center ml-2"> 
               <form action="/logout" method="post">
                   @csrf
                   <button type="submit" class="btn btn-danger">Logout</button>
               </form>
             </a>
-              <div class="dropdown d-flex align-middle align-items-center pl-3">
-                <a role="button" data-toggle="dropdown" aria-expanded="false">
-                    <div class="style-person-icon">
-                        <span class="material-icons">
-                            person
-                        </span>
-                    </div>
-                </a>
-  
-                <div class="dropdown-menu">
-                    <div class="account-login pl-2 ">
-                        <span> Anjasmara </span>
-                    </div>
-                    <div class="pl-2 pt-1">
-                        <button type="button" class="btn btn-danger" 
-                            >Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {{-- <a v-if="!responseAuth?.token" class="nav-link text-white" href="/login">
-                <button type="button" class="btn btn-light">Login</button>
-            </a> --}}
+            @endauth
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'loginAuthentication'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::resource('/administator', AdministatorController::class);
-Route::resource('/member', MemberController::class);
-Route::get('/member-list-json', [MemberController::class, 'templateJsonMember']);
+Route::resource('/administator', AdministatorController::class)->middleware('auth');;
+Route::resource('/member', MemberController::class)->middleware('auth');;
+Route::get('/member-list-json', [MemberController::class, 'templateJsonMember'])->middleware('auth');;
 

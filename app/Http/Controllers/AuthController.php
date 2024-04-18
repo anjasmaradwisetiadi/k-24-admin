@@ -26,7 +26,11 @@ class AuthController extends Controller
 
         if(Auth::attempt($validators)){
             $request->session()->regenerate();
-            return redirect('/home')->with('success', 'Successfull login !!!');
+            $request->session()->flash('success', 'Successful Register !!!');
+            return view('home.home',[
+                'title' =>'Home',
+                'active' => 'home'
+            ]);
         } else {
             return redirect('/login')->with('loginError', 'Successfull Unsucsseful !!!');
         }
