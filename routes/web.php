@@ -25,17 +25,17 @@ Route::get('/', function () {
         'title' => 'Home',
         'active' => 'home'
     ]);
-});
+})->middleware('auth');
 
 Route::get('/home', function () {
     return view('home.home',[
         'title' => 'Home',
         'active' => 'home'
     ]);
-});
+})->middleware('auth');
 
-Route::get('/login', [AuthController::class, 'login']);
-Route::post('/login', [AuthController::class, 'loginAuthentication']);
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'loginAuthentication'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::resource('/administator', AdministatorController::class);

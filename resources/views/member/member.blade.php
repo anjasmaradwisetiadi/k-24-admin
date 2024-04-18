@@ -10,6 +10,12 @@
             <h3>Member</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            @include('components.message-alert')
+        </div>
+    </div>
+
     <div class="row mb-2">
         <div class="col">
             <button type="button" class="button-style-primary"><a href="/member/create" class="add-new-counter-link" >Add Member</a></button>

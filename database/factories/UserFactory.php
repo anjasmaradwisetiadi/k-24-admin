@@ -15,11 +15,19 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'id'=> Str::uuid(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('memberdefault'),
+            'no_hp'=>$this->faker->phoneNumber(),
+            'date_birth'=>$this->faker->dateTimeBetween('-17 year', '+120 year'),
+            'gender'=>$this->faker->randomElement(['male','female']),
+            'no_ktp'=> $this->faker->nik(),
+            'photo'=>'https://images.ygoprodeck.com/images/cards_small/6983839.jpg',
+            'position'=>$this->faker->randomElement(['administator','member']),
+            'status'=>$this->faker->boolean(),
             'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
         ];
     }
 

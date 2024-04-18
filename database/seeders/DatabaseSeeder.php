@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-use App\Models\AdminMember;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //********* */ create user role Administator
-        AdminMember::create([
+        User::create([
             'id'=> Str::uuid(),
             'name' => 'Anjasmara Dwi Setiadi',
             'email'=> 'anjasmara@gmail.com',
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'status'=> true,
         ]);
 
-        AdminMember::create([
+        User::create([
             'id'=> Str::uuid(),
             'name' => 'Ihdi Ulfaq',
             'email'=> 'ihdiulfaq@gmail.com',
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'status'=> false,
         ]);
         //********* */ create user role Member
-        AdminMember::create([
+        User::create([
             'id'=> Str::uuid(),
             'name' => 'Mylalovic Frederich',
             'email'=> 'mylalovic@gmail.com',
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'status'=> true,
         ]);
 
-        AdminMember::create([
+        User::create([
             'id'=> Str::uuid(),
             'name' => 'Santiago Lozano',
             'email'=> 'santiagolozano@gmail.com',
@@ -73,6 +73,6 @@ class DatabaseSeeder extends Seeder
             'position'=>'member',
             'status'=> false,
         ]);
-        AdminMember::factory(50)->create();
+        User::factory(50)->create();
     }
 }

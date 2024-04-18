@@ -18,6 +18,12 @@
             <a class="nav-link text-white align-self-center ml-2" href="/login"> 
               <button type="button" class="btn btn-primary">Login</button>
             </a>
+            <a class="nav-link text-white align-self-center ml-2"> 
+              <form action="/logout" method="post">
+                  @csrf
+                  <button type="submit" class="btn btn-danger">Logout</button>
+              </form>
+            </a>
               <div class="dropdown d-flex align-middle align-items-center pl-3">
                 <a role="button" data-toggle="dropdown" aria-expanded="false">
                     <div class="style-person-icon">

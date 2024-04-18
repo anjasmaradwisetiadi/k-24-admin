@@ -5,10 +5,19 @@
 
 @section('container')
 <div id="Category-Crud-Create">
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <h3>Dashboard</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @include('components.message-alert')
+        </div>
+    </div>
     <div class="row">
         <div class="col d-flex justify-content-center page-not-found">
             <div>
-                <h2 class="mb-2">Dashboard</h2>
                 <p class="mt-5">
                     Welcome , <b>{Username}</b> 
                 </p>

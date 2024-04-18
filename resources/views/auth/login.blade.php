@@ -13,6 +13,23 @@
     <div class="row mb-3 justify-content-center">
         <div class="col-6">
             <form action="/login" method="POST">
+                @csrf
+                @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{session('success')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endif
+                @if(session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{session('loginError')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endif
                 <div class="form-group">
                     <label for="email">Email </label>
                     <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
