@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @push('styles')
-    <link href="{{ asset('css/member/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
 @endpush
 
 @section('container')
 <div id="Admin" class="mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h3>Admin</h3>
+            <h3>Administator</h3>
         </div>
     </div>
     <div class="row">

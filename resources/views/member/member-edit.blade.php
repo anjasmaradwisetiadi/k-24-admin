@@ -4,7 +4,7 @@
 @endpush
 
 @section('container')
-<div id="Member-Edit">
+<div id="Member-Edit" class="mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <h3>{{$active === 'administator' ? 'Administator Edit' : 'Member Edit'}}</h3>
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="form-create">
-        <form action="{{$active === 'administator' ?  route('administator.update', $user->id) :  route('member.update', $user->id) }} " method="post" enctype="multipart/form-data">
+        <form action="{{$active === 'administator' ? route('administator.update', $user->id) :  route('member.update', $user->id) }} " method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
@@ -89,9 +89,8 @@
             <div class="form-group">
                 <label for="position">Position</label>
                 <select class="custom-select mr-sm-2 @error('position') is-invalid @enderror" id="position" name="position">
-                    <option value ="" {{ old('position') === ''? 'selected':'' }} selected disabled>Position Selected</option>
-                    <option value="administator" {{ old('position') === 'administator' ? '': 'selected' }}>Administator</option>
-                    <option value="member" {{ old('position') === 'member'? '': 'selected' }}>Member</option>
+                    <option value="administator" {{ old('position') === 'administator' ? 'selected': '' }}>Administator</option>
+                    <option value="member" {{ old('position') === 'member'? 'selected': ''  }}>Member</option>
                   </select>
                 @error('position')
                 <div class="invalid-feedback d-block">
@@ -102,7 +101,7 @@
             <div class="form-group" style="display: block;">
                 <label for="photo" class="d-block">Uplod Photo</label>
                 {{--********* it is hidden image --}}
-                <input type="hidden" name="oldImage" type="file" value="{{$user->photo}}">
+                <input type="hidden" name="oldPhoto" type="file" value="{{$user->photo}}">
                 <input type="file" class="form-input-file " id="photo" name="photo" aria-describedby="photo" accept="image/*"
                     onchange="imagePreview()"
                 >

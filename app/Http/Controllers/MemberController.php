@@ -57,7 +57,8 @@ class MemberController extends Controller
         $validatedData = $this->validatorInput($request,'create');
 
         if($request->file('photo')){
-            $validatedData['photo'] = $request->file('photo')->store('photo-users');
+            $savePhoto = $request->file('photo')->store('photo-users');
+            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
         }
         
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -115,10 +116,14 @@ class MemberController extends Controller
         $validatedData = $this->validatorInput($request,'edit');
 
         if($request->file('photo')){
-            if($request->oldImage){
-                $nameOldImage = str_replace('http://laravel-test-k-24.test/storage/photo-users/','',$request->oldImage);
-                Storage::delete($nameOldImage);
+            if($request->oldPhoto){
+                $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$request->oldPhoto);
+                if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
+                    Storage::delete($nameOldPhoto);
+                }
             }
+            $savePhoto = $request->file('photo')->store('photo-users');
+            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
         }
 
         User::where('id', $user->id)
@@ -136,7 +141,17 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::where('id','=',$id)->firstOrFail(); 
+        if($user->photo){
+            $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$user->photo);
+            if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
+                Storage::delete($nameOldPhoto); 
+            }
+        }
+        User::destroy($user->id);
+        session()->flash('success', 'User has been deleted !!!');
+        return redirect('/member');
     }
 
     public function templateJsonMember(){

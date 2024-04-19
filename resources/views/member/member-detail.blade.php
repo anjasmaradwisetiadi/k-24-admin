@@ -15,7 +15,7 @@
             <div class="row mb-2">
                 <div class="col">
                     @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
-                    <a href="/member/{{$user->id}}/edit" class="add-new-counter-link">
+                    <a href="{{$active === 'administator' ? `/administator/`.$user->id.'/edit' : `/member/`.$user->id.'/edit'}}" class="add-new-counter-link">
                         <button type="button" class="button-style-primary mr-2">Edit Member</button>
                     </a>
                     <a class="add-new-counter-link">
