@@ -19,6 +19,7 @@
     </div>
     <div class="form-create">
         <form action="/member/{{$user->id}}" method="post" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
@@ -88,9 +89,9 @@
             <div class="form-group">
                 <label for="position">Position</label>
                 <select class="custom-select mr-sm-2 @error('position') is-invalid @enderror" id="position" name="position">
-                    <option value ="" {{ old('position', $user->position) === ''? 'selected':'' }} selected disabled>Position Selected</option>
-                    <option value="administator" {{ old('position',$user->position) === 'administator' ? '': 'selected' }}>Administator</option>
-                    <option value="member" {{ old('position',$user->position) === 'member'? '': 'selected' }}>Member</option>
+                    <option value ="" {{ old('position') === ''? 'selected':'' }} selected disabled>Position Selected</option>
+                    <option value="administator" {{ old('position') === 'administator' ? '': 'selected' }}>Administator</option>
+                    <option value="member" {{ old('position') === 'member'? '': 'selected' }}>Member</option>
                   </select>
                 @error('position')
                 <div class="invalid-feedback d-block">
@@ -100,6 +101,8 @@
             </div>
             <div class="form-group" style="display: block;">
                 <label for="photo" class="d-block">Uplod Photo</label>
+                {{--********* it is hidden image --}}
+                <input type="hidden" name="oldImage" type="file" value="{{$user->photo}}">
                 <input type="file" class="form-input-file " id="photo" name="photo" aria-describedby="photo" accept="image/*"
                     onchange="imagePreview()"
                 >
