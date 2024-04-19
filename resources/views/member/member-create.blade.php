@@ -150,6 +150,6 @@
           ofReader.onload = function(event){
             imageDisplay.src = event.target.result
           }
-        }
+    }
 </script>    
 @endsection

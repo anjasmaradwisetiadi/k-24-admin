@@ -96,9 +96,11 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
+        $user = User::where('id','=',$id)->firstOrFail();
         return view('member.member-edit', [
             'title' => 'Member',
-            'active' => 'member'
+            'active' => 'member',
+            'user'=> $user
         ]);
     }
 
