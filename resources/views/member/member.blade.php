@@ -16,11 +16,12 @@
         </div>
     </div>
 
-    <div class="row mb-2">
+    <div class="row mb-2 justify-content-start">
         <div class="col">
             @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
-            <a href="/member/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add Member </button> </a>
+            <a href="/member/create" class="add-new-counter-link" > <button type="button" class="button-style-primary mr-2"> Add User </button> </a>
             @endif
+            <a href="/member-list-json" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Get List Json </button> </a>
         </div>
     </div>
     <div class="row">

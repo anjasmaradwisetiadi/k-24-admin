@@ -17,7 +17,7 @@
     </div>
     <div class="row mb-2">
         <div class="col">
-            <a href="/administator/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add Member </button> </a>
+            <a href="/administator/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add User </button> </a>
         </div>
     </div>
     <div class="row">

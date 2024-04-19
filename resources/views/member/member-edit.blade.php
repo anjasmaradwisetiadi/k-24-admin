@@ -89,8 +89,8 @@
             <div class="form-group">
                 <label for="position">Position</label>
                 <select class="custom-select mr-sm-2 @error('position') is-invalid @enderror" id="position" name="position">
-                    <option value="administator" {{ old('position') === 'administator' ? 'selected': '' }}>Administator</option>
-                    <option value="member" {{ old('position') === 'member'? 'selected': ''  }}>Member</option>
+                    <option value="administator" {{ old('position', $user->position) === 'administator' ? 'selected': '' }}>Administator</option>
+                    <option value="member" {{ old('position', $user->position) === 'member'? 'selected': ''  }}>Member</option>
                   </select>
                 @error('position')
                 <div class="invalid-feedback d-block">
