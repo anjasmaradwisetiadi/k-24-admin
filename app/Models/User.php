@@ -21,6 +21,13 @@ class User extends Authenticatable
     protected $keyType = 'string';
     public $incrementing = false;
 
+    public function scopeFilter($query,$filters){
+        $query->when($filters ?? false, function($query, $user){
+            return  $query->where('name', 'like', '%'.$user.'%')
+                        ->orWhere('email', 'like', '%'.$user.'%');
+        });
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

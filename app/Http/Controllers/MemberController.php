@@ -20,10 +20,11 @@ class MemberController extends Controller
     {   
         if(auth()->user()->position === 'administator'){
             $users = User::where('position','=','member')
-                ->latest()->paginate(10)->withQueryString();
+                ->latest()->filter(request('member'))->paginate(10)->withQueryString();
         } else if (auth()->user()->position === 'member'){
             $users = User::where('position','=','member')
-                ->where('status','=',true)->latest()->paginate(10)->withQueryString();
+                    ->where('status','=',true)
+                    ->latest()->filter(request('member'))->paginate(10)->withQueryString();
         }
 
         return view('member.member', [

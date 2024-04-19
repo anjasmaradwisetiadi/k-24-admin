@@ -18,7 +18,8 @@ class AdministatorController extends Controller
      */
     public function index()
     {
-        $users = User::where('position','=','administator')->latest()->paginate(10)->withQueryString();
+        $users = User::where('position','=','administator')
+            ->latest()->filter(request('administator'))->paginate(10)->withQueryString();
 
         return view('admin.admin', [
             'title' => 'Administator',

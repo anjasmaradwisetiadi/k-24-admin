@@ -15,6 +15,18 @@
             @include('components.message-alert')
         </div>
     </div>
+    <div class="row justify-content-center p-6">
+        <div class="col-md-6">
+            <form action="/administator">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search email or name..." aria-label="Search" name="administator" value="{{request('administator')}}">
+                    <div class="input-group-append">
+                      <button class="btn button-style-primary text-white" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row mb-2">
         <div class="col">
             <a href="/administator/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add User </button> </a>

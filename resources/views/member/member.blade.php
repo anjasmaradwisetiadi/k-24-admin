@@ -16,6 +16,19 @@
         </div>
     </div>
 
+    <div class="row justify-content-center p-6">
+        <div class="col-md-6">
+            <form action="/member">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search email or name..." aria-label="Search" name="member" value="{{request('member')}}">
+                    <div class="input-group-append">
+                      <button class="btn button-style-primary text-white" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row mb-2 justify-content-start">
         <div class="col">
             @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
