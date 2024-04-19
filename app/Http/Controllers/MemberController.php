@@ -17,9 +17,15 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $users = User::where('position','=','member')
-            ->where('status','=',true)->latest()->paginate(10)->withQueryString();
+    {   
+        if(auth()->user()->position === 'administator'){
+            $users = User::where('position','=','member')
+                ->latest()->paginate(10)->withQueryString();
+        } else if (auth()->user()->position === 'member'){
+            $users = User::where('position','=','member')
+                ->where('status','=',true)->latest()->paginate(10)->withQueryString();
+        }
+
         return view('member.member', [
             'title' => 'Member',
             'active' => 'member',
@@ -57,6 +63,7 @@ class MemberController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['status'] = $validatedData['position'] === 'member' ? 0 : 1;
         $validatedData['id'] = Str::uuid()->toString();
+
         User::create($validatedData);
 
         return redirect('/member')->with('success', 'Successful make new member !!!');
