@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <form action="/administator">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search email or name..." aria-label="Search" name="administator" value="{{request('administator')}}">
+                    <input type="text" class="form-control" placeholder="Search email or name..." aria-label="Search" name="search" value="{{request('search')}}">
                     <div class="input-group-append">
                       <button class="btn button-style-primary text-white" type="submit">Search</button>
                     </div>
