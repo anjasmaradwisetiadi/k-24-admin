@@ -7,18 +7,18 @@
 <div id="Member-Create" class="mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h3>Member Create</h3>
+            <h3>{{$active === 'administator' ? 'Administator Create' : 'Member Create'}}</h3>
         </div>
     </div>
     <div class="row mb-2">
         <div class="col d-flex justify-content-end">
-            <a href="/member" class="add-new-counter-link">
+            <a href="{{$active === 'administator' ? '/administator' : '/member'}}" class="add-new-counter-link">
                 <button type="button" class="button-style-secondary">Kembali</button>
             </a>
         </div>
     </div>
     <div class="form-create">
-        <form action="/member" method="post" enctype="multipart/form-data">
+        <form action="{{$active === 'administator' ? route('administator.store') :  route('member.store') }} " method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>

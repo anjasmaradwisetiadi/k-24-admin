@@ -7,7 +7,7 @@
 <div id="Member-Detail" class="mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h3>Member Detail</h3>
+            <h3>{{$active === 'administator' ? 'Administator Detail' : 'Member Detail'}}</h3>
         </div>
     </div>
     <div class="row justify-content-center mt-4">
@@ -19,7 +19,7 @@
                         <button type="button" class="button-style-primary mr-2">Edit Member</button>
                     </a>
                     <a class="add-new-counter-link">
-                        <form action="/member/{{$user->id}}" method="post" style="display: inline">
+                        <form action="{{$active === 'administator' ?  route('administator.destroy', $user->id) :  route('member.destroy', $user->id) }}" method="post" style="display: inline">
                             @method('delete')
                             @csrf
                             <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')" 
@@ -31,7 +31,7 @@
                     @endif
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <a href="/member" class="add-new-counter-link">
+                    <a href="{{$active === 'administator' ? '/administator' : '/member'}}" class="add-new-counter-link">
                         <button type="button" class="button-style-secondary">Kembali</button>
                     </a>
                 </div>

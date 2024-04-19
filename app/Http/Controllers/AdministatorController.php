@@ -30,9 +30,10 @@ class AdministatorController extends Controller
      */
     public function create()
     {
-        return view('admin.admin-create', [
+
+        return view('member.member-create', [
             'title' => 'Administator',
-            'active' => 'administator'
+            'active' => 'administator',
         ]);
     }
 
@@ -44,7 +45,7 @@ class AdministatorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('berhasil akses');
     }
 
     /**
@@ -56,7 +57,8 @@ class AdministatorController extends Controller
     public function show($id)
     {
         $user = User::where('id','=',$id)->firstOrFail();
-        return view('admin.admin-detail', [
+
+        return view('member.member-detail', [
             'title' => 'Administator',
             'active' => 'administator',
             'user'=> $user
@@ -71,9 +73,11 @@ class AdministatorController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.admin-edit', [
+        $user = User::where('id','=',$id)->firstOrFail();
+        return view('member.member-edit', [
             'title' => 'Administator',
-            'active' => 'administator'
+            'active' => 'administator',
+            'user'=> $user
         ]);
     }
 

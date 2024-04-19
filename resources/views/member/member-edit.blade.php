@@ -7,18 +7,18 @@
 <div id="Member-Edit">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h3>Member Edit</h3>
+            <h3>{{$active === 'administator' ? 'Administator Edit' : 'Member Edit'}}</h3>
         </div>
     </div>
     <div class="row mb-2">
         <div class="col d-flex justify-content-end">
-            <a href="/member" class="add-new-counter-link">
+            <a href="{{$active === 'administator' ? '/administator' : '/member'}}" class="add-new-counter-link">
                 <button type="button" class="button-style-secondary">Kembali</button>
             </a>
         </div>
     </div>
     <div class="form-create">
-        <form action="/member/{{$user->id}}" method="post" enctype="multipart/form-data">
+        <form action="{{$active === 'administator' ?  route('administator.update', $user->id) :  route('member.update', $user->id) }} " method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
