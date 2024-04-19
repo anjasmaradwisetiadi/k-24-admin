@@ -32,7 +32,7 @@
                 @endif
                 <div class="form-group">
                     <label for="email">Email </label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" name="email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" name="email" value="{{old('email')}}">
                     @error('email')
                     <div class="invalid-feedback d-block">
                       {{$message}}

@@ -14,6 +14,7 @@
         <div class="col-9">
             <div class="row mb-2">
                 <div class="col">
+                    @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
                     <a href="/member/{{$user->id}}/edit" class="add-new-counter-link">
                         <button type="button" class="button-style-primary mr-2">Edit Member</button>
                     </a>
@@ -27,6 +28,7 @@
                             </button>
                         </form>
                     </a>
+                    @endif
                 </div>
                 <div class="col d-flex justify-content-end">
                     <a href="/member" class="add-new-counter-link">

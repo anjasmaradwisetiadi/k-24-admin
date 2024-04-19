@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav navbar-list d-flex justify-content-center">
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'home' || $active === '' ? 'active text-active': '' : ''}}"  href="/home">Home </a>
-            @if (auth()->user()->position === 'administator')
+            @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'administator' ? 'active text-active': '' : ''}}"  href="/administator">Administator </a>
             @endif
             <a class="nav-link text-white align-self-center ml-2 {{isset($active) ? $active === 'member' ? 'active text-active': '': ''}}"  href="/member">Member</a>

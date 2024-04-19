@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class MemberController extends Controller
 {
@@ -44,7 +47,28 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'no_ktp' => 'required|',
+            'email'=> 'required|email|unique:users',
+            'no_hp' => 'required|min:10|max:14',
+            'gender' => 'required',
+            'date_birth' => 'required',
+            'position' => 'required',
+            'password' => 'required|min:8|max:24',
+            'photo' =>'image|file|max:1024'
+        ]);
+
+        if($request->file('photo')){
+            $validatedData['photo'] = $request->file('photo')->store('photo-users');
+        }
+
+        $registerValidate['password'] = Hash::make($validatedData['password']);
+        $validatedData['status'] = $validatedData['position'] === 'member' ? 0 : 1;
+        $validatedData['id'] = Str::uuid()->toString();
+        User::create($validatedData);
+
+        return redirect('/member')->with('success', 'Successful make new member !!!');
     }
 
     /**

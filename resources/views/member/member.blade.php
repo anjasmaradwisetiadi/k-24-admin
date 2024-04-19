@@ -18,7 +18,9 @@
 
     <div class="row mb-2">
         <div class="col">
+            @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
             <a href="/member/create" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Add Member </button> </a>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -70,6 +72,7 @@
                                         </span>
                                     </button>
                                 </a>
+                                @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
                                 <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
                                     <button class="button-style-primary">
                                         <span class="material-icons">
@@ -89,6 +92,7 @@
                                         </button>
                                     </form>
                                 </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
