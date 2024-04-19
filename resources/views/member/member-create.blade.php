@@ -109,10 +109,10 @@
             </div>
             <div class="form-group" style="display: block;">
                 <label for="photo" class="d-block">Uplod Photo</label>
-                <input type="file" class="form-input-file " id="photo" name="photo" aria-describedby="photo" accept="image/*">
-                {{-- <div>
-                    Preview Image
-                </div> --}}
+                <input type="file" class="form-input-file " id="photo" name="photo" aria-describedby="photo" accept="image/*"
+                    onchange="imagePreview()"
+                >
+                <img class="photo-preview image-fluid mt-2">
                 @error('photo')
                 <div class="invalid-feedback d-block">
                   {{$message}}
@@ -135,5 +135,21 @@
         $('#position').val('member');
         $('#password').val('memberdefault');
     }
+
+    function imagePreview(){
+          const imageDisplay = document.querySelector('.photo-preview');
+          const imageData = document.querySelector('#photo');
+
+          imageDisplay.style.display = 'block';
+          imageDisplay.style.height = '150px';
+          imageDisplay.style.width = '120px';
+
+          const ofReader = new FileReader();
+          ofReader.readAsDataURL(imageData.files[0]);
+
+          ofReader.onload = function(event){
+            imageDisplay.src = event.target.result
+          }
+        }
 </script>    
 @endsection

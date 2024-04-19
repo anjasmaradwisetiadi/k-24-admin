@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'date_birth'=>Carbon::create('1998', '01', '23'),
             'gender'=>'male',
             'no_ktp'=>'0863175418163',
-            'photo'=>'https://images.ygoprodeck.com/images/cards_small/99726621.jpg',
+            'photo'=>'http://laravel-test-k-24.test/storage/photo-users/shuraiq-omen.jpg',
             'position'=>'administator',
             'status'=> true,
         ]);
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'date_birth'=>Carbon::create('1991', '02', '23'),
             'gender'=>'male',
             'no_ktp'=>'0863175318363',
-            'photo'=>'https://images.ygoprodeck.com/images/cards_small/99726621.jpg',
+            'photo'=>'http://laravel-test-k-24.test/storage/photo-users/shuraiq-omen.jpg',
             'position'=>'administator',
             'status'=> false,
         ]);
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'date_birth'=>Carbon::create('1997', '04', '12'),
             'gender'=>'female',
             'no_ktp'=>'0863175318163',
-            'photo'=>'https://images.ygoprodeck.com/images/cards_small/6983839.jpg',
+            'photo'=>'http://laravel-test-k-24.test/storage/photo-users/shuraiq-omen.jpg',
             'position'=>'member',
             'status'=> true,
         ]);
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'date_birth'=>Carbon::create('1991', '04', '12'),
             'gender'=>'female',
             'no_ktp'=>'0863179618163',
-            'photo'=>'https://images.ygoprodeck.com/images/cards_small/6983839.jpg',
+            'photo'=>'http://laravel-test-k-24.test/storage/photo-users/shuraiq-omen.jpg',
             'position'=>'member',
             'status'=> false,
         ]);

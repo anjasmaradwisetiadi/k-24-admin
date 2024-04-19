@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'date_birth'=>$this->faker->dateTimeBetween('-17 year', '+120 year'),
             'gender'=>$this->faker->randomElement(['male','female']),
             'no_ktp'=> $this->faker->nik(),
-            'photo'=>'https://images.ygoprodeck.com/images/cards_small/6983839.jpg',
+            'photo'=>env('APP_URL').'storage/photo-users/shuraiq-omen.jpg',
             'position'=>$this->faker->randomElement(['administator','member']),
             'status'=>$this->faker->boolean(),
             'remember_token' => Str::random(10),
