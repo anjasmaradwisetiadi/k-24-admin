@@ -39,16 +39,16 @@ class Handler extends ExceptionHandler
         });
     }
     // setting page not found
-    // function render($request, Throwable $exception)
-    // {
-    //         if ($this->isHttpException($exception)) {
-    //             if ($exception->getStatusCode() == 404) {
-    //                 return response()->view('components.404', [], 404);
-    //             }
-    //             if ($exception->getStatusCode() == 500) {
-    //                 return response()->view('components.404', [], 500);
-    //             }
-    //         }
-    //         return parent::render($request, $exception);
-    // }
+    function render($request, Throwable $exception)
+    {
+            if ($this->isHttpException($exception)) {
+                if ($exception->getStatusCode() == 404) {
+                    return response()->view('components.404', [], 404);
+                }
+                if ($exception->getStatusCode() == 500) {
+                    return response()->view('components.404', [], 500);
+                }
+            }
+            return parent::render($request, $exception);
+    }
 }

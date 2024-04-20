@@ -105,7 +105,7 @@
                     </tr>
                     @endforeach
                     @endif
-                    @if(!isset($users))
+                    @if(!count($users))
                     <tr>
                         <td colspan="6">
                             <div class="d-flex justify-content-center">
@@ -115,7 +115,7 @@
                     </tr>
                     @endif
                 </tbody>
-                @if(isset($users))
+                @if(!count($users))
                 <tfoot>
                     <th colspan="6">
                         <div class="row">
