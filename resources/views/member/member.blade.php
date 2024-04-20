@@ -86,7 +86,7 @@
                                         </span>
                                     </button>
                                 </a>
-                                @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') === 'administator' : false)
+                                @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') : false)
                                 <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
                                     <button class="button-style-primary">
                                         <span class="material-icons">

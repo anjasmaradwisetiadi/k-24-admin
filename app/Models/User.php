@@ -53,15 +53,15 @@ class User extends Authenticatable
     }
 
     public function rolePermision($permission){
-        $userRole = auth()->user()->role_id;
-        $roleGet = Role::where('id','=',$userRole)->firstOrFail();
-        $rolePermision = json_decode($roleGet->permisions);
-        $result = false;
-        for ($x = 0; $x < count($rolePermision); $x++) {
-            if ($rolePermision[$x] === $permission){
-                $result = true;
-            } 
-        }
-        return $result;
+            $userRole = $this->role_id;
+            $roleGet = Role::where('id','=',$userRole)->firstOrFail();
+            $rolePermision = json_decode($roleGet->permisions);
+            $result = false;
+            for ($x = 0; $x < count($rolePermision); $x++) {
+                if ($rolePermision[$x] === $permission){
+                    $result = true;
+                } 
+            }
+            return $result;
     }
 }

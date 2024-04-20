@@ -92,10 +92,8 @@ class MemberController extends Controller
             }
 
             $validatedData["password"] = Hash::make($validatedData["password"]);
-            $validatedData["status"] =
-                $validatedData["position"] === "member" ? 0 : 1;
-            $validatedData["role_id"] =
-                $validatedData["position"] === "administator" ? "0" : "1";
+            $validatedData["status"] =$validatedData["position"] === "member" ? 0 : 1;
+            $validatedData["role_id"] = $validatedData["position"] === "administator" ? "1" : "2";
             $validatedData["id"] = Str::uuid()->toString();
 
             User::create($validatedData);
@@ -185,8 +183,7 @@ class MemberController extends Controller
                 $validatedData["photo"] =
                     env("APP_URL") . "storage/" . $savePhoto;
             }
-            $validatedData["role_id"] =
-                $validatedData["position"] === "administator" ? "0" : "1";
+            $validatedData["role_id"] = $validatedData["position"] === "administator" ? "1" : "2";
 
             User::where("id", $user->id)->update($validatedData);
 

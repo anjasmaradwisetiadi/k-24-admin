@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login(){        
         return view('auth.login', [
             'title' => 'Login',
             'active' => 'login'
@@ -51,9 +51,10 @@ class AuthController extends Controller
             $this->updateStatusLoginUser($identifierUser, 'logout');
         }
 
-        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        
+        Auth::logout();
         return redirect('/login');
     }
 
