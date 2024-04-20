@@ -10,11 +10,12 @@
             <h3>{{$active === 'administator' ? 'Administator Detail' : 'Member Detail'}}</h3>
         </div>
     </div>
+    @if(isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member')  : false)
     <div class="row justify-content-center mt-4">
         <div class="col-9">
             <div class="row mb-2">
                 <div class="col">
-                    @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
+                    @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') : false)
                     <a href="{{$active === 'administator' ? `/administator/`.$user->id.'/edit' : `/member/`.$user->id.'/edit'}}" class="add-new-counter-link">
                         <button type="button" class="button-style-primary mr-2">Edit Member</button>
                     </a>
@@ -38,6 +39,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-9">
             <div class="card-trap-spell-preview wrap-card-currently">

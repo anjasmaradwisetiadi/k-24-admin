@@ -18,14 +18,26 @@ class AdministatorController extends Controller
      */
     public function index()
     {
-        $users = User::where('position','=','administator')
-            ->latest()->filter(request('search'))->paginate(10)->withQueryString();
+        $users = User::where("position", "=", "administator")
+            ->latest()
+            ->filter(request("search"))
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('admin.admin', [
-            'title' => 'Administator',
-            'active' => 'administator',
-            'users'=> $users,
-        ]);
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            return view("admin.admin", [
+                "title" => "Administator",
+                "active" => "administator",
+                "users" => $users,
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
+        }
     }
 
     /**
@@ -35,11 +47,19 @@ class AdministatorController extends Controller
      */
     public function create()
     {
-
-        return view('member.member-create', [
-            'title' => 'Administator',
-            'active' => 'administator',
-        ]);
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            return view("member.member-create", [
+                "title" => "Administator",
+                "active" => "administator",
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
+        }
     }
 
     /**
@@ -50,20 +70,33 @@ class AdministatorController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $this->validatorInput($request,'create');
-        if($request->file('photo')){
-            $savePhoto = $request->file('photo')->store('photo-users');
-            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            $validatedData = $this->validatorInput($request, "create");
+            if ($request->file("photo")) {
+                $savePhoto = $request->file("photo")->store("photo-users");
+                $validatedData["photo"] =
+                    env("APP_URL") . "storage/" . $savePhoto;
+            }
+
+            $validatedData["password"] = Hash::make($validatedData["password"]);
+            $validatedData["status"] =
+                $validatedData["position"] === "member" ? 0 : 1;
+            $validatedData["role_id"] =
+                $validatedData["position"] === "administator" ? "0" : "1";
+            $validatedData["id"] = Str::uuid()->toString();
+
+            User::create($validatedData);
+
+            session()->flash("success", "Successful make new administator !!!");
+            return redirect("/administator");
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
         }
-
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['status'] = $validatedData['position'] === 'member' ? 0 : 1;
-        $validatedData['id'] = Str::uuid()->toString();
-
-        User::create($validatedData);
-
-        session()->flash('success', 'Successful make new administator !!!');
-        return redirect('/administator');
     }
 
     /**
@@ -74,13 +107,22 @@ class AdministatorController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            $user = User::where("id", "=", $id)->firstOrFail();
 
-        return view('member.member-detail', [
-            'title' => 'Administator',
-            'active' => 'administator',
-            'user'=> $user
-        ]);
+            return view("member.member-detail", [
+                "title" => "Administator",
+                "active" => "administator",
+                "user" => $user,
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
+        }
     }
 
     /**
@@ -91,12 +133,21 @@ class AdministatorController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
-        return view('member.member-edit', [
-            'title' => 'Administator',
-            'active' => 'administator',
-            'user'=> $user
-        ]);
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            $user = User::where("id", "=", $id)->firstOrFail();
+            return view("member.member-edit", [
+                "title" => "Administator",
+                "active" => "administator",
+                "user" => $user,
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
+        }
     }
 
     /**
@@ -108,25 +159,40 @@ class AdministatorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::where('id','=', $id)->firstOrFail();
-        $validatedData = $this->validatorInput($request,'edit');
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            $user = User::where("id", "=", $id)->firstOrFail();
+            $validatedData = $this->validatorInput($request, "edit");
 
-        if($request->file('photo')){
-            if($request->oldPhoto){
-                $nameOldPhoto = str_replace( env('APP_URL').'storage/','',$request->oldPhoto);
-                if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
-                    Storage::delete($nameOldPhoto);
+            if ($request->file("photo")) {
+                if ($request->oldPhoto) {
+                    $nameOldPhoto = str_replace(
+                        env("APP_URL") . "storage/",
+                        "",
+                        $request->oldPhoto
+                    );
+                    if ($nameOldPhoto !== "photo-users/shuraiq-omen.jpg") {
+                        Storage::delete($nameOldPhoto);
+                    }
                 }
+                $savePhoto = $request->file("photo")->store("photo-users");
+                $validatedData["photo"] =
+                    env("APP_URL") . "storage/" . $savePhoto;
             }
-            $savePhoto = $request->file('photo')->store('photo-users');
-            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
+            $validatedData["role_id"] =
+                $validatedData["position"] === "administator" ? "0" : "1";
+
+            User::where("id", $user->id)->update($validatedData);
+
+            session()->flash("success", "Successful update administator !!!");
+            return redirect("/administator");
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
         }
-
-        User::where('id', $user->id)
-        ->update($validatedData);
-
-        session()->flash('success', 'Successful update administator !!!');
-        return redirect('/administator');
     }
 
     /**
@@ -137,41 +203,54 @@ class AdministatorController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::where('id','=',$id)->firstOrFail(); 
-        if($user->photo){
-            $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$user->photo);
-            if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
-                Storage::delete($nameOldPhoto); 
+        if (
+            auth()
+                ->user()
+                ->rolePermision("full view administator")
+        ) {
+            $user = User::where("id", "=", $id)->firstOrFail();
+            if ($user->photo) {
+                $nameOldPhoto = str_replace(
+                    env("APP_URL") . "storage/",
+                    "",
+                    $user->photo
+                );
+                if ($nameOldPhoto !== "photo-users/shuraiq-omen.jpg") {
+                    Storage::delete($nameOldPhoto);
+                }
             }
-        }
 
-        User::destroy($user->id);
-        session()->flash('success', 'User has been deleted !!!');
-        return redirect('/administator');
+            User::destroy($user->id);
+            session()->flash("success", "User has been deleted !!!");
+            return redirect("/administator");
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect("/");
+        }
     }
 
-    public function validatorInput($request, $from){
-        if($from === 'create'){
+    public function validatorInput($request, $from)
+    {
+        if ($from === "create") {
             return $request->validate([
-                'name' => 'required|max:255',
-                'no_ktp' => 'required|',
-                'email'=> 'required|email|unique:users',
-                'no_hp' => 'required|min:10|max:16',
-                'gender' => 'required',
-                'date_birth' => 'required',
-                'position' => 'required',
-                'password' => 'required|min:8|max:24',
-                'photo' =>'required|image|file|max:1024'
+                "name" => "required|max:255",
+                "no_ktp" => "required|",
+                "email" => "required|email|unique:users",
+                "no_hp" => "required|min:10|max:16",
+                "gender" => "required",
+                "date_birth" => "required",
+                "position" => "required",
+                "password" => "required|min:8|max:24",
+                "photo" => "required|image|file|max:1024",
             ]);
-    
-        } else if($from === 'edit'){
+        } elseif ($from === "edit") {
             return $request->validate([
-                'name' => 'required|max:255',
-                'no_ktp' => 'required|',
-                'no_hp' => 'required|min:10|max:16',
-                'gender' => 'required',
-                'date_birth' => 'required',
-                'position' => 'required',
+                "name" => "required|max:255",
+                "no_ktp" => "required|",
+                "no_hp" => "required|min:10|max:16",
+                "gender" => "required",
+                "date_birth" => "required",
+                "position" => "required",
             ]);
         }
     }

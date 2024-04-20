@@ -16,7 +16,7 @@ class UserFactory extends Factory
     {
         return [
             'id'=> Str::uuid(),
-            'role_id'=>strval($this->faker->numberBetween(0,1)),
+            'role_id'=>strval($this->faker->numberBetween(1,2)),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('memberdefault'),

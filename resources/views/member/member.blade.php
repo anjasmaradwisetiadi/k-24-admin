@@ -31,7 +31,7 @@
 
     <div class="row mb-2 justify-content-start">
         <div class="col">
-            @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
+            @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') : false)
             <a href="/member/create" class="add-new-counter-link" > <button type="button" class="button-style-primary mr-2"> Add User </button> </a>
             @endif
             <a href="/member-list-json" class="add-new-counter-link" > <button type="button" class="button-style-primary"> Get List Json </button> </a>
@@ -86,7 +86,7 @@
                                         </span>
                                     </button>
                                 </a>
-                                @if (isset(auth()->user()->position) ? auth()->user()->position === 'administator' : false)
+                                @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') === 'administator' : false)
                                 <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
                                     <button class="button-style-primary">
                                         <span class="material-icons">

@@ -18,10 +18,11 @@ class MemberController extends Controller
      */
     public function index()
     {   
-        if(auth()->user()->position === 'administator'){
+
+        if(auth()->user()->rolePermision('full view administator')){
             $users = User::where('position','=','member')
                 ->latest()->filter(request('search'))->paginate(10)->withQueryString();
-        } else if (auth()->user()->position === 'member'){
+        } else if (auth()->user()->rolePermision('separate view member')){
             $users = User::where('position','=','member')
                     ->where('status','=',true)
                     ->latest()->filter(request('search'))->paginate(10)->withQueryString();
@@ -40,11 +41,16 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('member.member-create', [
-            'title' => 'Member',
-            'active' => 'member'
-        ]);
+    {   
+        if( auth()->user()->rolePermision('full view administator') ){
+            return view('member.member-create', [
+                'title' => 'Member',
+                'active' => 'member'
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect('/');
+        }
     }
 
     /**
@@ -55,20 +61,26 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $this->validatorInput($request,'create');
+        if( auth()->user()->rolePermision('full view administator') ){
+            $validatedData = $this->validatorInput($request,'create');
 
-        if($request->file('photo')){
-            $savePhoto = $request->file('photo')->store('photo-users');
-            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
+            if($request->file('photo')){
+                $savePhoto = $request->file('photo')->store('photo-users');
+                $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
+            }
+            
+            $validatedData['password'] = Hash::make($validatedData['password']);
+            $validatedData['status'] = $validatedData['position'] === 'member' ? 0 : 1;
+            $validatedData['role_id'] = $validatedData['position'] === 'administator' ? '0' : '1';
+            $validatedData['id'] = Str::uuid()->toString();
+    
+            User::create($validatedData);
+    
+            return redirect('/member')->with('success', 'Successful make new member !!!');
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect('/');
         }
-        
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['status'] = $validatedData['position'] === 'member' ? 0 : 1;
-        $validatedData['id'] = Str::uuid()->toString();
-
-        User::create($validatedData);
-
-        return redirect('/member')->with('success', 'Successful make new member !!!');
     }
 
     /**
@@ -96,12 +108,17 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
-        return view('member.member-edit', [
-            'title' => 'Member',
-            'active' => 'member',
-            'user'=> $user
-        ]);
+        if( auth()->user()->rolePermision('full view administator') ){
+            $user = User::where('id','=',$id)->firstOrFail();
+            return view('member.member-edit', [
+                'title' => 'Member',
+                'active' => 'member',
+                'user'=> $user
+            ]);
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect('/');
+        }
     }
 
     /**
@@ -113,26 +130,30 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::where('id','=', $id)->firstOrFail();
-        $validatedData = $this->validatorInput($request,'edit');
-        dd($request);
-
-        if($request->file('photo')){
-            if($request->oldPhoto){
-                $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$request->oldPhoto);
-                if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
-                    Storage::delete($nameOldPhoto);
+        if( auth()->user()->rolePermision('full view administator') ){
+            $user = User::where('id','=', $id)->firstOrFail();
+            $validatedData = $this->validatorInput($request,'edit');
+    
+            if($request->file('photo')){
+                if($request->oldPhoto){
+                    $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$request->oldPhoto);
+                    if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
+                        Storage::delete($nameOldPhoto);
+                    }
                 }
+                $savePhoto = $request->file('photo')->store('photo-users');
+                $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
             }
-            $savePhoto = $request->file('photo')->store('photo-users');
-            $validatedData['photo'] = (env('APP_URL').'storage/'.$savePhoto);
+            $validatedData['role_id'] = $validatedData['position'] === 'administator' ? '0' : '1';
+    
+            User::where('id', $user->id)
+                ->update($validatedData);
+            
+            return redirect('/member')->with('success', 'Successful update member !!!');
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect('/');
         }
-
-        User::where('id', $user->id)
-            ->update($validatedData);
-        
-        return redirect('/member')->with('success', 'Successful update member !!!');
-
     }
 
     /**
@@ -143,24 +164,29 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-
-        $user = User::where('id','=',$id)->firstOrFail(); 
-        if($user->photo){
-            $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$user->photo);
-            if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
-                Storage::delete($nameOldPhoto); 
+        if( auth()->user()->rolePermision('full view administator') ){
+            $user = User::where('id','=',$id)->firstOrFail(); 
+            if($user->photo){
+                $nameOldPhoto = str_replace(env('APP_URL').'storage/','',$user->photo);
+                if($nameOldPhoto !== 'photo-users/shuraiq-omen.jpg'){
+                    Storage::delete($nameOldPhoto); 
+                }
             }
+            User::destroy($user->id);
+            session()->flash('success', 'User has been deleted !!!');
+            return redirect('/member');
+
+        } else {
+            session()->flash("loginError", "You don't have permision !!!");
+            return redirect('/');
         }
-        User::destroy($user->id);
-        session()->flash('success', 'User has been deleted !!!');
-        return redirect('/member');
     }
 
     public function templateJsonMember(){
-        if(auth()->user()->position === 'administator'){
+        if(auth()->user()->rolePermision('full view administator')){
             $users = User::where('position','=','member')
                 ->latest()->paginate(10)->withQueryString();
-        } else if (auth()->user()->position === 'member'){
+        } else if (auth()->user()->rolePermision('separate view member')){
             $users = User::where('position','=','member')
                     ->where('status','=',true)
                     ->latest()->paginate(10)->withQueryString();

@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
         Role::create([
             'name'=>'member',
             'permisions'=> json_encode(array(
-                '1'=>'separate view member',
+                '0'=>'separate view member',
             ))
         ]);
 
         //********* */ create user 
         User::create([
             'id'=> Str::uuid(),
-            'role_id'=> '0',
+            'role_id'=> '1',
             'name' => 'Anjasmara Dwi Setiadi',
             'email'=> 'anjasmara@gmail.com',
             'password' => bcrypt('anjasmara'),
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id'=> Str::uuid(),
-            'role_id'=> '0',
+            'role_id'=> '1',
             'name' => 'Ihdi Ulfaq',
             'email'=> 'ihdiulfaq@gmail.com',
             'password' => bcrypt('ihdiulfaq'),
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
         //********* */ create user role Member
         User::create([
             'id'=> Str::uuid(),
-            'role_id'=> '1',
+            'role_id'=> '2',
             'name' => 'Mylalovic Frederich',
             'email'=> 'mylalovic@gmail.com',
             'password' => bcrypt('mylalovic'),
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id'=> Str::uuid(),
-            'role_id'=> '1',
+            'role_id'=> '2',
             'name' => 'Santiago Lozano',
             'email'=> 'santiagolozano@gmail.com',
             'password' => bcrypt('santiagolozano'),

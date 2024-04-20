@@ -48,7 +48,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function product(){
-        return $this->hasOne(Role::class, 'id', 'role_id');
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function rolePermision($permission){
+        $userRole = auth()->user()->role_id;
+        $roleGet = Role::where('id','=',$userRole)->firstOrFail();
+        $rolePermision = json_decode($roleGet->permisions);
+        $result = false;
+        for ($x = 0; $x < count($rolePermision); $x++) {
+            if ($rolePermision[$x] === $permission){
+                $result = true;
+            } 
+        }
+        return $result;
     }
 }
