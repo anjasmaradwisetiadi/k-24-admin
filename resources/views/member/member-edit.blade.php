@@ -117,21 +117,21 @@
                 @endif
             </div>
             <button type="Submit" class="button-style-primary mr-2">Submit</button>
-            {{-- <button type="button" class="button-style-primary mr-2" onclick="payloadUser()">Payload</button> --}}
+            <button type="button" class="button-style-primary mr-2" onclick="payloadUser()">Payload</button>
         </form>
     </div>
 </div>
 <script>
-    // function payloadUser(){
-    //     $('#name').val('Prasetyo Kurawa');
-    //     $('#no_ktp').val('1111745605050309');
-    //     $('#email').val('enteng.prasetyo@example.net');
-    //     $('#no_hp').val('022 0862 600');
-    //     $('#gender').val('male');
-    //     $('#date_birth').val('23-02-2023');
-    //     $('#position').val('member');
-    //     $('#password').val('memberdefault');
-    // }
+    function payloadUser(){
+        $('#name').val('Prasetyo Kurawa');
+        $('#no_ktp').val('1111745605050309');
+        $('#email').val('enteng.prasetyo@example.net');
+        $('#no_hp').val('022 0862 600');
+        $('#gender').val('male');
+        $('#date_birth').val('23-02-2023');
+        $('#position').val('member');
+        $('#password').val('memberdefault');
+    }
 
     function imagePreview(){
         const imageDisplay = document.querySelector('.photo-preview');
