@@ -115,6 +115,7 @@ class MemberController extends Controller
     {
         $user = User::where('id','=', $id)->firstOrFail();
         $validatedData = $this->validatorInput($request,'edit');
+        dd($request);
 
         if($request->file('photo')){
             if($request->oldPhoto){
@@ -173,7 +174,7 @@ class MemberController extends Controller
                 'date_birth' => 'required',
                 'position' => 'required',
                 'password' => 'required|min:8|max:24',
-                'photo' =>'image|file|max:1024'
+                'photo' =>'required|image|file|max:1024'
             ]);
     
         } else if($from === 'edit'){

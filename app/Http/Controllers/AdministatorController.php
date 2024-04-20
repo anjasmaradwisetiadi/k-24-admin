@@ -161,7 +161,7 @@ class AdministatorController extends Controller
                 'date_birth' => 'required',
                 'position' => 'required',
                 'password' => 'required|min:8|max:24',
-                'photo' =>'image|file|max:1024'
+                'photo' =>'required|image|file|max:1024'
             ]);
     
         } else if($from === 'edit'){
