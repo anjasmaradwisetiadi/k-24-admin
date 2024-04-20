@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -17,9 +18,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        //********* */ create user role Administator
+        //********* */ create user role 
+        Role::create([
+            'name'=>'administator',
+            'permisions'=> json_encode(array(
+                '0'=>'full view administator',
+                '1'=>'full view member',
+                '2'=>'crud member',
+            ))
+        ]);
+
+        Role::create([
+            'name'=>'member',
+            'permisions'=> json_encode(array(
+                '1'=>'separate view member',
+            ))
+        ]);
+
+        //********* */ create user 
         User::create([
             'id'=> Str::uuid(),
+            'role_id'=> '0',
             'name' => 'Anjasmara Dwi Setiadi',
             'email'=> 'anjasmara@gmail.com',
             'password' => bcrypt('anjasmara'),
@@ -34,6 +53,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id'=> Str::uuid(),
+            'role_id'=> '0',
             'name' => 'Ihdi Ulfaq',
             'email'=> 'ihdiulfaq@gmail.com',
             'password' => bcrypt('ihdiulfaq'),
@@ -48,6 +68,7 @@ class DatabaseSeeder extends Seeder
         //********* */ create user role Member
         User::create([
             'id'=> Str::uuid(),
+            'role_id'=> '1',
             'name' => 'Mylalovic Frederich',
             'email'=> 'mylalovic@gmail.com',
             'password' => bcrypt('mylalovic'),
@@ -62,6 +83,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id'=> Str::uuid(),
+            'role_id'=> '1',
             'name' => 'Santiago Lozano',
             'email'=> 'santiagolozano@gmail.com',
             'password' => bcrypt('santiagolozano'),
@@ -73,6 +95,7 @@ class DatabaseSeeder extends Seeder
             'position'=>'member',
             'status'=> false,
         ]);
+
         User::factory(50)->create();
     }
 }
