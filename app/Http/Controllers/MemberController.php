@@ -157,9 +157,19 @@ class MemberController extends Controller
     }
 
     public function templateJsonMember(){
+        if(auth()->user()->position === 'administator'){
+            $users = User::where('position','=','member')
+                ->latest()->paginate(10)->withQueryString();
+        } else if (auth()->user()->position === 'member'){
+            $users = User::where('position','=','member')
+                    ->where('status','=',true)
+                    ->latest()->paginate(10)->withQueryString();
+        }
+
         return view('member.member-list-json', [
             'title' => 'Member',
-            'active' => 'member'
+            'active' => 'member',
+            'users'=> $users
         ]);
     }
 

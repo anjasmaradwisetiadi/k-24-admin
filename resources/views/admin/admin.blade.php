@@ -118,7 +118,7 @@
                 @if(isset($users))
                 <tfoot>
                     <th colspan="6">
-                        <div class="row" v-if="dataDeckBuilders?.data?.length">
+                        <div class="row">
                             <div class="col">
                                 {{ $users->links() }}
                             </div>
