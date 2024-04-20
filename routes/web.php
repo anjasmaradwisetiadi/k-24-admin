@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\AdministatorController;
 
@@ -38,7 +39,10 @@ Route::get('/login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'loginAuthentication'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::resource('/administator', AdministatorController::class)->middleware('auth');;
-Route::resource('/member', MemberController::class)->middleware('auth');;
-Route::get('/member-list-json', [MemberController::class, 'templateJsonMember'])->middleware('auth');;
+Route::resource('/administator', AdministatorController::class)->middleware('auth');
+Route::resource('/member', MemberController::class)->middleware('auth');
+Route::get('/member-list-json', [MemberController::class, 'templateJsonMember'])->middleware('auth');
+
+// run this script for fixing data user on attribute "role_id". because random value make by factory seeder
+Route::get('/run-script-user', [UserController::class, 'runScriptUser'])->middleware('auth');
 

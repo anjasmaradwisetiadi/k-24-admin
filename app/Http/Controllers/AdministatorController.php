@@ -174,6 +174,7 @@ class AdministatorController extends Controller
                         "",
                         $request->oldPhoto
                     );
+                    // prevent default delete image spesific (shuraiq-omen.jpg)
                     if ($nameOldPhoto !== "photo-users/shuraiq-omen.jpg") {
                         Storage::delete($nameOldPhoto);
                     }
@@ -215,6 +216,7 @@ class AdministatorController extends Controller
                     "",
                     $user->photo
                 );
+                // prevent default delete image spesific (shuraiq-omen.jpg)
                 if ($nameOldPhoto !== "photo-users/shuraiq-omen.jpg") {
                     Storage::delete($nameOldPhoto);
                 }
