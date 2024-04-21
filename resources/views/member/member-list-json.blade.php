@@ -15,6 +15,11 @@
         <div class="col">
             {{ $users->links() }}
         </div>
+        <div class="col d-flex justify-content-end">
+            <a href="/member" class="add-new-counter-link">
+                <button type="button" class="button-style-secondary">Kembali</button>
+            </a>
+        </div>
     </div>
     <div id="member-list-json">
 

@@ -7,7 +7,7 @@
 <div id="Member-Create" class="mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <h3>{{$active === 'administator' ? 'Administator Create' : 'Member Create'}}</h3>
+            <h3>User Create</h3>
         </div>
     </div>
     <div class="row mb-2">

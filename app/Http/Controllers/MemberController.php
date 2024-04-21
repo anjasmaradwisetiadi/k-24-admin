@@ -98,7 +98,7 @@ class MemberController extends Controller
 
             User::create($validatedData);
             session()->flash("success", "Successful make new ".$validatedData["position"]." !!!");
-            return redirect("/member")
+            return redirect("/member");
         } else {
             session()->flash("loginError", "You don't have permision !!!");
             return redirect("/");
