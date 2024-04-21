@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email*</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" aria-describedby="email" value="{{old('email', $user->email)}}">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" aria-describedby="email" value="{{old('email', $user->email)}}" readonly>
                 @error('email')
                 <div class="invalid-feedback d-block">
                   {{$message}}
@@ -98,6 +98,64 @@
                 </div>
                 @enderror
             </div>
+            <div class="form-group ">
+                <div class="">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rePassword" >
+                    <label class="form-check-label" for="gridCheck1">
+                      Change Password ?
+                    </label>
+                  </div>
+                  <div>
+                    <input type="hidden" type="text"  name='rePasswordConfirm' id="rePasswordConfirm" value="unchecked">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-2">
+                  <div class="collapse" id="collapseRePassword">
+                    <div class="card-trap-spell-preview wrap-card-currently">
+                        <div class="form-group">
+                            <label for="password">Old Password*</label>
+                            <div class="input-group mb-3" id="show_hide_password">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text pointer" onclick="oldPassword()">
+                                            <span class="material-icons ">
+                                                visibility_off
+                                            </span>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="oldPassword" aria-describedby="password" name="oldPassword">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">New Password*</label>
+                            <div class="input-group mb-3" id="show_hide_password_new">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text pointer" onclick="newPassword()">
+                                            <span class="material-icons ">
+                                                visibility_off
+                                            </span>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="newPassword" aria-describedby="password" name="newPassword">
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="invalid-feedback" id="invalid-feedback">
+                                Unsuccessfull validate old password
+                            </div>
+                            <div class="valid-feedback" id="valid-feedback">
+                                Successfull validate old password
+                            </div>
+                        </div>
+                        <div>
+                            <button type='button' class="button-style-primary" onclick="checkPassword()" > Check Password </button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+
             <div class="form-group" style="display: block;">
                 <label for="photo" class="d-block">Uplod Photo*</label>
                 {{--********* it is hidden image --}}
@@ -116,12 +174,13 @@
                 <img class="photo-preview mt-2">
                 @endif
             </div>
-            <button type="Submit" class="button-style-primary mr-2">Submit</button>
+            <button type="submit" class="button-style-primary mr-2" id="submit" >Submit</button>
             {{-- <button type="button" class="button-style-primary mr-2" onclick="payloadUser()">Payload</button> --}}
         </form>
     </div>
 </div>
 <script>
+    const checkbox = document.getElementById('rePassword');
 
     function imagePreview(){
         const imageDisplay = document.querySelector('.photo-preview');
@@ -137,6 +196,90 @@
         ofReader.onload = function(event){
             imageDisplay.src = event.target.result
         }
+    }
+
+
+    checkbox.addEventListener('change', (event) => {
+        const buttonSubmit = document.querySelector('#submit');
+        const rePasswordConfirm = document.querySelector('#rePasswordConfirm');
+        const collapseRePassword = document.querySelector('#collapseRePassword');
+        let myCollapse = new bootstrap.Collapse(collapseRePassword); 
+        if (event.currentTarget.checked) {
+            rePasswordConfirm.value = 'checked';
+            buttonSubmit.setAttribute('disabled', ''); 
+            myCollapse;
+        } else {
+            rePasswordConfirm.value = 'unchecked';
+            buttonSubmit.removeAttribute('disabled');
+            myCollapse;
+        }
+    })
+
+    function oldPassword(){
+        var buttonVisibility = document.querySelector("#show_hide_password span");
+        var input = document.querySelector("#show_hide_password input");
+
+        if(input.getAttribute('type') === 'text'){
+            input.setAttribute('type', 'password'); 
+            buttonVisibility.innerHTML = 'visibility';
+            buttonVisibility.innerHTML = 'visibility_off';
+        } else if(input.getAttribute('type') === 'password'){
+            input.setAttribute('type', 'text'); 
+            buttonVisibility.innerHTML = 'visibility_off';
+            buttonVisibility.innerHTML = 'visibility';
+        }
+    }
+
+    function newPassword(){
+        var buttonVisibility = document.querySelector("#show_hide_password_new span");
+        var input = document.querySelector("#show_hide_password_new input");
+
+        if(input.getAttribute('type') === 'text'){
+            input.setAttribute('type', 'password'); 
+            buttonVisibility.innerHTML = 'visibility';
+            buttonVisibility.innerHTML = 'visibility_off';
+        } else if(input.getAttribute('type') === 'password'){
+            input.setAttribute('type', 'text'); 
+            buttonVisibility.innerHTML = 'visibility_off';
+            buttonVisibility.innerHTML = 'visibility';
+        }
+    }
+
+    function checkPassword(){
+        const newPassword = document.getElementById('newPassword');
+        const oldPassword = document.getElementById('oldPassword');
+        const invalidFeedback = document.getElementById('invalid-feedback');
+        const validFeedback = document.getElementById('valid-feedback');
+        const buttonSubmit = document.getElementById('submit');
+
+        const email = document.getElementById('email');
+
+        axios({
+            method: 'post',
+            url: '/user/confirm-password',
+            data: {
+                email: email.value,
+                oldPassword: oldPassword.value,
+                newPassword: newPassword.value,
+            },
+        })
+        .then((response)=>{
+            if(response.data.status){
+                validFeedback.classList.add('d-block');
+                invalidFeedback.classList.remove('d-block');
+                buttonSubmit.removeAttribute('disabled');
+            } else {
+                invalidFeedback.classList.add('d-block');
+                validFeedback.classList.remove('d-block');
+                buttonSubmit.setAttribute('disabled', ''); 
+            }
+
+        })
+        .catch((error)=>{
+            invalidFeedback.classList.add('d-block');
+            validFeedback.classList.remove('d-block');
+            buttonSubmit.setAttribute('disabled', ''); 
+        })
     }
 
 </script>

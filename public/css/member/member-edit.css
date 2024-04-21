@@ -7,3 +7,10 @@
     height: 150px;
     width: 120px;
 }
+
+.wrap-card-currently {
+    border: 3px solid #385979;
+    background-color: #0D2F4E;
+    padding: 14px;
+    border-radius: 10px;
+}
