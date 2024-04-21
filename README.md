@@ -21,44 +21,72 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Main Technology
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Main technology using for this app: 
+```
+Laravel 8
+Bootstrap 4.6
+MySql
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+More another package you can look on file ```package.json``` and ```composer.json```
 
-## Laravel Sponsors
+## To Run the Laravel
+First, you must have an  ```.env``` file first. To get it, you can access the folder
+```
+/assets-suplemen
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+how to install laravel package run this command.
+```
+composer install
+```
+then for running laravel run this command.
+```
+php artisan serve
+```
 
-### Premium Partners
+For instalation and running laravel you can follow documentation <a href="https://laravel.com/docs/8.x" target="_blank">Laravel 8</a> , or when you use ,<b> Windows</b> you can running application <a href="https://laragon.org/docs/" target="_blank">Laragon</a>. 
+Another information you can running migration seeder on laravel, for example data. 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Note Important Read
+When you need get data that can be used in this application. There are two ways, namely <b> run migration </b> and <b> import database </b>
 
-## Contributing
+1. How to use <b> run migration </b> 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Run the migrate database command
+```
+php artisan migrate:fresh --seed
+```
+Then run the url command below to run the data repair script that was randomly generated from the previous command
+Make sure you have logged in first using the user listed below path <b> ## User have been Access <b>
+```
+https://master-duel-ruler.site/run-script-user
+```
+2. How to use <b> import database </b> 
+You can download examples of data used in the database by taking it to the folder
+```
+/assets-suplemen
+```
+Import the database that you usually use using the example database above
 
-## Code of Conduct
+## User have been Access
+User can use for testing and authenthic on App
+```
+1.
+email: anjasmara@gmail.com
+password: anjasmara
+position: administator
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2.
+email: mylalovic@gmail.com
+password: mylalovic
+position: member
 
-## Security Vulnerabilities
+3. 
+another user with any role, it have default password
+password: memberdefault
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+It have fun use App, Thanks :smile:
