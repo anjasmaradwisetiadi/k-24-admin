@@ -250,12 +250,14 @@ class AdministatorController extends Controller
         } elseif ($from === "edit") {
             $validateInput = [
                 "name" => "required|max:255",
-                "no_ktp" => "required|",
+                "no_ktp" => "required",
                 "no_hp" => "required|min:10|max:16",
                 "gender" => "required",
                 "date_birth" => "required",
                 "position" => "required",
-            ];
+            ]
+            
+            $request->file("photo") ? ($validateInput['photo'] = 'required|image|file|max:1024') : false;
             if($changePassword === 'unchecked'){
                 return $request->validate($validateInput);
             } else if($changePassword === 'checked'){
