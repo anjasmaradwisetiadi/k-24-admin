@@ -78,7 +78,16 @@
             </div>
             <div class="form-group">
                 <label for="date_birth" class="d-block">Date Birth*</label>
-                <input type="date" class="form-input-file @error('date_birth') is-invalid @enderror" id="date_birth" name="date_birth" aria-describedby="date_birth" value="{{old('date_birth')}}">
+                <div class="input-group mb-3">
+                    <input type="date" class="form-input-file @error('date_birth') is-invalid @enderror" id="date_birth" name="date_birth" aria-describedby="date_birth" value="{{old('date_birth')}}">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="material-icons ">
+                                calendar_month
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 @error('date_birth')
                 <div class="invalid-feedback d-block">
                   {{$message}}
@@ -134,8 +143,11 @@
     </div>
 </div>
 <script>
+    // const flatpickr = require("flatpickr");
+
     const noKtp = document.getElementById('no_ktp');
     const noHp = document.getElementById('no_hp');
+    const dateBirth = document.getElementById('date_birth');
 
     function visibility(){
         var buttonVisibility = document.querySelector("#show_hide_password span");
@@ -174,6 +186,10 @@
     noHp.addEventListener('keyup', (event)=> {
         noHp.value = event.target.value.replace(/[^0-9]/g, '');
     })
+
+    flatpickr('#date_birth', {
+        "maxDate": new Date()
+    });
 
 </script>    
 @endsection
