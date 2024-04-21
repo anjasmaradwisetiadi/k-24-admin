@@ -1,0 +1,45 @@
+.name-user {
+    position: relative;
+    animation-name: example;
+    animation-duration: 2.2s;
+    animation-timing-function: ease-in;
+  }
+
+  .position-user {
+    position: relative;
+    animation-name: example;
+    animation-duration: 3.4s;
+    animation-timing-function: ease-in;
+  }
+
+  @keyframes example {
+    0% {
+      left: 0px;
+      top: -14px;
+      opacity: 0;
+    }
+
+    25% {
+      left: 0px;
+      top: -8px;
+      opacity: 0.25;
+    }
+
+    50% {
+      left: 0px;
+      top: -4px;
+      opacity: 0.5;
+    }
+
+    75% {
+      left: 0px;
+      top: 0px;
+      opacity: 0.75;
+    }
+
+    100% {
+      left: 0px;
+      top: 0px;
+      opacity: 1;
+    }
+  }

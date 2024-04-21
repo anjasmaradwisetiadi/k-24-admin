@@ -237,7 +237,7 @@ class AdministatorController extends Controller
         if ($from === "create") {
             return $request->validate([
                 "name" => "required|max:255",
-                "no_ktp" => "required|",
+                "no_ktp" => "required|min:15|max:16",
                 "email" => "required|email|unique:users",
                 "no_hp" => "required|min:10|max:16",
                 "gender" => "required",
@@ -249,7 +249,7 @@ class AdministatorController extends Controller
         } elseif ($from === "edit") {
             $validateInput = [
                 "name" => "required|max:255",
-                "no_ktp" => "required",
+                "no_ktp" => "required|min:15|max:16",
                 "no_hp" => "required|min:10|max:16",
                 "gender" => "required",
                 "date_birth" => "required",

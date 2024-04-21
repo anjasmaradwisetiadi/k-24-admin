@@ -187,6 +187,8 @@
 </div>
 <script>
     const checkbox = document.getElementById('rePassword');
+    const noKtp = document.getElementById('no_ktp');
+    const noHp = document.getElementById('no_hp');
 
     function imagePreview(){
         const imageDisplay = document.querySelector('.photo-preview');
@@ -302,6 +304,13 @@
             buttonSubmit.setAttribute('disabled', ''); 
         }
     }
+
+    noKtp.addEventListener('keyup', (event)=> {
+        noKtp.value = event.target.value.replace(/[^0-9]/g, '');
+    })
+    noHp.addEventListener('keyup', (event)=> {
+        noHp.value = event.target.value.replace(/[^0-9]/g, '');
+    })
 
 </script>
 @endsection

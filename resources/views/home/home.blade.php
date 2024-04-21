@@ -18,12 +18,12 @@
     <div class="row">
         <div class="col d-flex justify-content-center page-not-found">
             <div>
-                <p class="mt-5">
-                    Welcome , <b>{{auth()->user()->name}}</b> 
-                </p>
-                <p>
-                    You login as <b>{{auth()->user()->position}}</b> 
-                </p>
+                <h5 class="mt-5 mb-3">
+                    Welcome , <b class="name-user">{{auth()->user()->name}}</b> 
+                </h5>
+                <h5>
+                    You login as <b class="position-user"> {{auth()->user()->position}}</b> 
+                </h5>
             </div>
         </div>
     </div>

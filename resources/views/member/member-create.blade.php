@@ -134,6 +134,8 @@
     </div>
 </div>
 <script>
+    const noKtp = document.getElementById('no_ktp');
+    const noHp = document.getElementById('no_hp');
 
     function visibility(){
         var buttonVisibility = document.querySelector("#show_hide_password span");
@@ -165,6 +167,13 @@
             imageDisplay.src = event.target.result
           }
     }
+
+    noKtp.addEventListener('keyup', (event)=> {
+        noKtp.value = event.target.value.replace(/[^0-9]/g, '');
+    })
+    noHp.addEventListener('keyup', (event)=> {
+        noHp.value = event.target.value.replace(/[^0-9]/g, '');
+    })
 
 </script>    
 @endsection
