@@ -165,7 +165,7 @@ class MemberController extends Controller
                 ->rolePermision("full view administator")
         ) {
             $user = User::where("id", "=", $id)->firstOrFail();
-            $validatedData = $this->validatorInput($request, "edit");
+            $validatedData = $this->validatorInput($request, "edit", $request->rePasswordConfirm);
 
             if ($request->file("photo")) {
                 if ($request->oldPhoto) {
@@ -182,6 +182,9 @@ class MemberController extends Controller
                 $savePhoto = $request->file("photo")->store("photo-users");
                 $validatedData["photo"] =
                     env("APP_URL") . "storage/" . $savePhoto;
+            }
+            if(isset($validatedData["password"])){
+                $validatedData["password"] = Hash::make($validatedData["password"]);
             }
             $validatedData["role_id"] = $validatedData["position"] === "administator" ? "1" : "2";
 
@@ -261,7 +264,7 @@ class MemberController extends Controller
         ]);
     }
 
-    public function validatorInput($request, $from)
+    public function validatorInput($request, $from, $changePassword='unchecked')
     {
         if ($from === "create") {
             return $request->validate([
@@ -276,14 +279,20 @@ class MemberController extends Controller
                 "photo" => "required|image|file|max:1024",
             ]);
         } elseif ($from === "edit") {
-            return $request->validate([
+            $validateInput = [
                 "name" => "required|max:255",
                 "no_ktp" => "required|",
                 "no_hp" => "required|min:10|max:16",
                 "gender" => "required",
                 "date_birth" => "required",
                 "position" => "required",
-            ]);
+            ];
+            if($changePassword === 'unchecked'){
+                return $request->validate($validateInput);
+            } else if($changePassword === 'checked'){
+                $validateInput['password'] = "required";
+                return $request->validate($validateInput);
+            }
         }
     }
 }

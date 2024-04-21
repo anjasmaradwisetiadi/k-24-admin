@@ -43,6 +43,7 @@ Route::resource('/administator', AdministatorController::class)->middleware('aut
 Route::resource('/member', MemberController::class)->middleware('auth');
 Route::get('/member-list-json', [MemberController::class, 'templateJsonMember'])->middleware('auth');
 
+Route::post('/user/confirm-password', [UserController::class, 'confirmPassword'])->middleware('auth');
 // run this script for fixing data user on attribute "role_id". because random value make by factory seeder
 Route::get('/run-script-user', [UserController::class, 'runScriptUser'])->middleware('auth');
 
