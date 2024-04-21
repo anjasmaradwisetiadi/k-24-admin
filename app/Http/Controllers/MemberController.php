@@ -97,11 +97,8 @@ class MemberController extends Controller
             $validatedData["id"] = Str::uuid()->toString();
 
             User::create($validatedData);
-
-            return redirect("/member")->with(
-                "success",
-                "Successful make new member !!!"
-            );
+            session()->flash("success", "Successful make new ".$validatedData["position"]." !!!");
+            return redirect("/member")
         } else {
             session()->flash("loginError", "You don't have permision !!!");
             return redirect("/");
@@ -188,11 +185,8 @@ class MemberController extends Controller
             $validatedData["role_id"] = $validatedData["position"] === "administator" ? "1" : "2";
 
             User::where("id", $user->id)->update($validatedData);
-
-            return redirect("/member")->with(
-                "success",
-                "Successful update member !!!"
-            );
+            session()->flash("success", "Successful update ".$validatedData["position"]." !!!");
+            return redirect("/member");
         } else {
             session()->flash("loginError", "You don't have permision !!!");
             return redirect("/");

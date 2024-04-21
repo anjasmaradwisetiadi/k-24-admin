@@ -84,14 +84,13 @@ class AdministatorController extends Controller
             }
 
             $validatedData["password"] = Hash::make($validatedData["password"]);
-            $validatedData["status"] =
-            $validatedData["position"] === "member" ? 0 : 1;
+            $validatedData["status"] = $validatedData["position"] === "member" ? 0 : 1;
             $validatedData["role_id"] = $validatedData["position"] === "administator" ? "1" : "2";
             $validatedData["id"] = Str::uuid()->toString();
 
             User::create($validatedData);
 
-            session()->flash("success", "Successful make new administator !!!");
+            session()->flash("success", "Successful make new ".$validatedData["position"]." !!!");
             return redirect("/administator");
         } else {
             session()->flash("loginError", "You don't have permision !!!");
@@ -190,7 +189,7 @@ class AdministatorController extends Controller
 
             User::where("id", $user->id)->update($validatedData);
 
-            session()->flash("success", "Successful update administator !!!");
+            session()->flash("success", "Successful update ".$validatedData["position"]." !!!");
             return redirect("/administator");
         } else {
             session()->flash("loginError", "You don't have permision !!!");
