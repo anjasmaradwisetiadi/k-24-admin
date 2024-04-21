@@ -41,9 +41,9 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <div class="input-group mb-3" id="show_hide_password">
+                    <div class="input-group mb-3" id="show_hide_password" >
                         <div class="input-group-prepend">
-                            <div class="input-group-text pointer">
+                            <div class="input-group-text pointer" onclick="visibility()">
                                     <span class="material-icons ">
                                         visibility_off
                                     </span>

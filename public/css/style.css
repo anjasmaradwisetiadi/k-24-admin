@@ -147,3 +147,7 @@ button[disabled]{
     font-size: .875em;
     color: #d4edda;
 }
+
+.d-hidden{
+    display: hidden !important;
+}

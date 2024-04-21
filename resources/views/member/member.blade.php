@@ -122,7 +122,6 @@
                     </tr>
                     @endif
                 </tbody>
-                @if(!count($users))
                 <tfoot>
                     <th colspan="6">
                         <div class="row">
@@ -132,7 +131,6 @@
                         </div>
                     </th>
                 </tfoot>
-                @endif
             </table>
         </div>
     </div>

@@ -101,7 +101,7 @@
             <div class="form-group ">
                 <div class="">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="rePassword" >
+                    <input class="form-check-input" type="checkbox" id="rePassword"  >
                     <label class="form-check-label" for="gridCheck1">
                       Change Password ?
                     </label>
@@ -127,6 +127,9 @@
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="oldPassword" aria-describedby="password" name="oldPassword">
                             </div>
                         </div>
+                        <div class="invalid-feedback" id="invalid-feedback">
+                            Unsuccessfull validate old password
+                        </div>
 
                         <div class="form-group">
                             <label for="password">New Password*</label>
@@ -138,15 +141,18 @@
                                             </span>
                                     </div>
                                 </div>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="newPassword" aria-describedby="password" name="newPassword">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="newPassword" aria-describedby="password" name="password">
                             </div>
                         </div>
+                        <div class="invalid-feedback" id="need-new-password">
+                            Please input new password
+                        </div>
                         <div class="mb-2">
-                            <div class="invalid-feedback" id="invalid-feedback">
-                                Unsuccessfull validate old password
-                            </div>
                             <div class="valid-feedback" id="valid-feedback">
                                 Successfull validate old password
+                            </div>
+                            <div class="text-light d-hidden" role="status" id="loading">
+                                <span class="sr-only">Loading...</span>
                             </div>
                         </div>
                         <div>
@@ -251,35 +257,50 @@
         const invalidFeedback = document.getElementById('invalid-feedback');
         const validFeedback = document.getElementById('valid-feedback');
         const buttonSubmit = document.getElementById('submit');
+        const needNewPassword = document.getElementById('need-new-password');
 
         const email = document.getElementById('email');
+        const loading = document.getElementById('loading');
 
-        axios({
-            method: 'post',
-            url: '/user/confirm-password',
-            data: {
-                email: email.value,
-                oldPassword: oldPassword.value,
-                newPassword: newPassword.value,
-            },
-        })
-        .then((response)=>{
-            if(response.data.status){
-                validFeedback.classList.add('d-block');
-                invalidFeedback.classList.remove('d-block');
-                buttonSubmit.removeAttribute('disabled');
-            } else {
+        invalidFeedback.classList.remove('d-block');
+        validFeedback.classList.remove('d-block');
+        loading.classList.add('spinner-border');
+        needNewPassword.classList.add('d-block');
+        console.log('need-new-password = ');
+        if(newPassword.value){
+            needNewPassword.classList.remove('d-block');
+            axios({
+                method: 'post',
+                url: '/user/confirm-password',
+                data: {
+                    email: email.value,
+                    oldPassword: oldPassword.value,
+                    newPassword: newPassword.value,
+                },
+            })
+            .then((response)=>{
+                if(response.data.status){
+                    validFeedback.classList.add('d-block');
+                    invalidFeedback.classList.remove('d-block');
+                    buttonSubmit.removeAttribute('disabled');
+                } else {
+                    invalidFeedback.classList.add('d-block');
+                    validFeedback.classList.remove('d-block');
+                    buttonSubmit.setAttribute('disabled', ''); 
+                }
+                loading.classList.remove('spinner-border');
+            })
+            .catch((error)=>{
                 invalidFeedback.classList.add('d-block');
                 validFeedback.classList.remove('d-block');
                 buttonSubmit.setAttribute('disabled', ''); 
-            }
-
-        })
-        .catch((error)=>{
-            invalidFeedback.classList.add('d-block');
-            validFeedback.classList.remove('d-block');
+                loading.classList.remove('spinner-border');
+            })
+        } else {
+            needNewPassword.classList.add('d-block');
+            loading.classList.remove('spinner-border');
             buttonSubmit.setAttribute('disabled', ''); 
-        })
+        }
     }
 
 </script>
