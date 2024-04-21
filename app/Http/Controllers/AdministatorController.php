@@ -255,7 +255,7 @@ class AdministatorController extends Controller
                 "gender" => "required",
                 "date_birth" => "required",
                 "position" => "required",
-            ]
+            ];
             
             $request->file("photo") ? ($validateInput['photo'] = 'required|image|file|max:1024') : false;
             if($changePassword === 'unchecked'){
