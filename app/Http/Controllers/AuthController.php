@@ -25,7 +25,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|max:32',
         ]);
 
-        if(count($validators)){
+        if(isset($validators)){
             $identifierUser = User::where('email','=', $request->email)->firstOrFail();
             if($identifierUser->position === 'member'){
                 $this->updateStatusLoginUser($identifierUser, 'login');
