@@ -24,6 +24,20 @@ body{
     border-radius: 0.5rem;
 }
 
+.button-style-primary-icon{
+    display: flex;
+    font-weight: 300;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: #0b365e;
+    border: 2px solid #F4F4F4;
+    color: #F4F4F4;
+    border-radius: 0.5rem;
+}
+
 .button-style-secondary{
     display: inline-block;
     font-weight: 300;
@@ -122,6 +136,32 @@ button[disabled]{
   background-color: #63625c;
   border: 2px solid #9c9494;
 }
+
+/* stryle manual pagination */
+
+.style-custom-pagination .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    background-color: #0b365e;
+    border: 2px solid #F4F4F4;
+    color: #F4F4F4;
+}
+
+.style-custom-pagination .page-item.disabled .page-link {
+    background-color: #0b365e !important;
+    border: 2px solid #F4F4F4;
+    color: #F4F4F4;
+}
+
+.style-custom-pagination .page-item.active .page-link{
+    background-color: #1a60a1 !important;
+    border: 2px solid #F4F4F4;
+    color: #F4F4F4;
+}
+
 
 .pointer{
     cursor: pointer;

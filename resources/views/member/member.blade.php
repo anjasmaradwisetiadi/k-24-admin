@@ -80,7 +80,7 @@
                         <td>
                             <div class="d-flex action-pointer justify-content-center">
                                 <a href="/member/{{$user->id}}" class="add-new-counter-link mr-2">
-                                    <button class="button-style-primary">
+                                    <button class="button-style-primary-icon">
                                         <span class="material-icons">
                                             visibility
                                         </span>
@@ -88,7 +88,7 @@
                                 </a>
                                 @if (isset(auth()->user()->position) ? auth()->user()->rolePermision('crud member') : false)
                                 <a href="/member/{{$user->id}}/edit" class="add-new-counter-link mr-2">
-                                    <button class="button-style-primary">
+                                    <button class="button-style-primary-icon">
                                         <span class="material-icons">
                                             edit
                                         </span>
@@ -98,7 +98,7 @@
                                     <form action="/member/{{$user->id}}" method="post" style="display: inline">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="button-style-primary" onclick="return confirm('Are you Sure want delete it ?')" 
+                                        <button type="submit" class="button-style-primary-icon" onclick="return confirm('Are you Sure want delete it ?')" 
                                             {{auth()->user()->email === $user->email ? 'disabled' : '' }}> 
                                             <span class="material-icons">
                                                 delete
@@ -125,7 +125,7 @@
                 <tfoot>
                     <th colspan="6">
                         <div class="row">
-                            <div class="col">
+                            <div class="col style-custom-pagination">
                                 {{ $users->links() }}
                             </div>
                         </div>
