@@ -27,8 +27,6 @@ class UserFactory extends Factory
             'photo'=>env('APP_URL').'storage/photo-users/shuraiq-omen.jpg',
             'position'=>$this->faker->randomElement(['administator','member']),
             'status'=>$this->faker->boolean(),
-            'remember_token' => Str::random(10),
-            'email_verified_at' => now(),
         ];
     }
 
